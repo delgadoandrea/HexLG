@@ -7,8 +7,8 @@
 #include "G4OpticalPhysics.hh"
 #include "G4EmStandardPhysics_option4.hh"
 
-#include "HeLGDetectorConstruction.hh"
-//#include "LXeActionInitialization.hh"
+#include "HexLGDetectorConstruction.hh"
+#include "HexLGActionInitialization.hh"
 
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 
   G4RunManager * runManager = new G4RunManager;
 
-  HeLGDetectorConstruction* det = new HeLGDetectorConstruction();
+  HexLGDetectorConstruction* det = new HexLGDetectorConstruction();
   runManager->SetUserInitialization(det);
 
   G4VModularPhysicsList* physicsList = new FTFP_BERT; //TODO Compare to PROSPECT's Physics List
@@ -43,7 +43,7 @@ int main(int argc, char** argv)
   physicsList->RegisterPhysics(opticalPhysics);
   runManager->SetUserInitialization(physicsList);
 
-  runManager->SetUserInitialization(new HeLGActionInitialization(det));
+  runManager->SetUserInitialization(new HexLGActionInitialization(det));
 
   //initialize visualization
   G4VisManager* visManager = new G4VisExecutive;

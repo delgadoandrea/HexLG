@@ -1,7 +1,24 @@
 file(REMOVE_RECURSE
   "CMakeFiles/HexLG.dir/HexLG.cc.o"
-  "bin/HexLG.pdb"
-  "bin/HexLG"
+  "CMakeFiles/HexLG.dir/src/HexLGActionInitialization.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGDetectorConstruction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGEventAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGEventMessenger.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGHistoManager.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGPMTHit.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGRun.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.o"
+  "CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.o"
+  "CMakeFiles/HexLG.dir/src/StringManip.cc.o"
+  "CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.o"
+  "HexLG.pdb"
+  "HexLG"
 )
 
 # Per-language clean rules from dependency scanning.

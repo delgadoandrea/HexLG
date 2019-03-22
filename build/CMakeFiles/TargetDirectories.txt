@@ -1,9 +1,7 @@
-/Users/1zd/HexLG/build/CMakeFiles/install/strip.dir
-/Users/1zd/HexLG/build/CMakeFiles/install.dir
-/Users/1zd/HexLG/build/CMakeFiles/list_install_components.dir
-/Users/1zd/HexLG/build/CMakeFiles/rebuild_cache.dir
-/Users/1zd/HexLG/build/CMakeFiles/edit_cache.dir
-/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir
-/Users/1zd/HexLG/build/CMakeFiles/install/local.dir
-/Users/1zd/HexLG/build/CMakeFiles/HexLGCommon.dir
-/Users/1zd/HexLG/build/CMakeFiles/HexLGCommon_Dict.dir
+/Users/andrea/HexLG/build/CMakeFiles/install/local.dir
+/Users/andrea/HexLG/build/CMakeFiles/rebuild_cache.dir
+/Users/andrea/HexLG/build/CMakeFiles/HexLG.dir
+/Users/andrea/HexLG/build/CMakeFiles/edit_cache.dir
+/Users/andrea/HexLG/build/CMakeFiles/install/strip.dir
+/Users/andrea/HexLG/build/CMakeFiles/install.dir
+/Users/andrea/HexLG/build/CMakeFiles/list_install_components.dir
