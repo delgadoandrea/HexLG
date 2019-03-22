@@ -175,7 +175,7 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
   G4AnalysisManager::Instance()->FillH1(5, fAbsorptionCount);
   G4AnalysisManager::Instance()->FillH1(6, fBoundaryAbsorptionCount);
 
-  if(fVerbose>0){
+  //if(fVerbose>0){
     //End of event output. later to be controlled by a verbose level
     G4cout << "\tNumber of photons that hit PMTs in this event : "
            << fHitCount << G4endl;
@@ -193,7 +193,7 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
            << (fPhotonCount_Scint + fPhotonCount_Ceren -
                 fAbsorptionCount - fHitCount - fBoundaryAbsorptionCount)
            << G4endl;
-  }
+  //}
 
   // update the run statistics
   HexLGRun* run = static_cast<HexLGRun*>(
@@ -208,10 +208,10 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
   run->IncHitsAboveThreshold(fPMTsAboveThreshold);
 
   //If we have set the flag to save 'special' events, save here
-  if(fPhotonCount_Scint + fPhotonCount_Ceren <= fDetector->GetSaveThreshold())
-  {
-    G4RunManager::GetRunManager()->rndmSaveThisEvent();
-  }
+  //if(fPhotonCount_Scint + fPhotonCount_Ceren <= fDetector->GetSaveThreshold())
+  //{
+  //  G4RunManager::GetRunManager()->rndmSaveThisEvent();
+  //}
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -3,6 +3,11 @@
 
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
+#include "G4Cache.hh"
+
+//#include "HexLGScintSD.hh"
+#include "HexLGPMTSD.hh"
+
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
@@ -24,6 +29,12 @@ class HexLGDetectorConstruction : public G4VUserDetectorConstruction
 
   //protected:
     //G4LogicalVolume*  fScoringVolume;
+
+   private:
+   	   //Sensitive Detectors
+    //G4Cache<HexLGScintSD*> fScint_SD;
+    G4Cache<HexLGPMTSD*> fPmt_SD;
+
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

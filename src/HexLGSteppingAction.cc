@@ -152,6 +152,7 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
         //absorbed but status was Detection
         G4SDManager* SDman = G4SDManager::GetSDMpointer();
         G4String sdName="/HexLGDet/pmtSD";
+        G4cout << "sdname: " << G4endl;
         HexLGPMTSD* pmtSD = (HexLGPMTSD*)SDman->FindSensitiveDetector(sdName);
         if(pmtSD)pmtSD->ProcessHits_constStep(theStep, nullptr);
         trackInformation->AddTrackStatusFlag(hitPMT);

@@ -1,7 +1,7 @@
 #include "HexLGDetectorConstruction.hh"
 #include "MaterialsHelper.hh"
 #include "SurfacesHelper.hh"
-//#include "LXePMTSD.hh"
+#include "HexLGPMTSD.hh"
 //#include "LXeScintSD.hh"
 //#include "LXeDetectorMessenger.hh"
 //#include "LXeMainVolume.hh"
@@ -204,11 +204,11 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                     false,                   //no boolean operation
                     0,                       //copy number
                     checkOverlaps); 
-  G4Polyhedra *core = new G4Polyhedra("SeparatorCore", 0, 360*deg,6,2, scint_z, zero_array, m_Envelope);
-  G4LogicalVolume* core_log = new G4LogicalVolume(core, Materials::CarbonFiber, "Separator_core");
-  new G4PVPlacement(NULL, {0,0,0},core_log,"Separator_core",sep_log,false, 0, true);
+  //G4Polyhedra *core = new G4Polyhedra("SeparatorCore", 0, 360*deg,6,2, scint_z, zero_array, m_Envelope);
+  //G4LogicalVolume* core_log = new G4LogicalVolume(core, Materials::CarbonFiber, "Separator_core");
+  //new G4PVPlacement(NULL, {0,0,0},core_log,"Separator_core",sep_log,false, 0, true);
 
-  new G4LogicalSkinSurface("SepOpticalSkin", core_log, SurfacesHelper::S().ESR);
+  //new G4LogicalSkinSurface("SepOpticalSkin", core_log, SurfacesHelper::S().ESR);
 
   //-------------------------------------------------------------
   // Scintillator Volume
@@ -357,7 +357,29 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      //PhotoMultiplierScorer* photocathode_PMScorer = new PhotoMultiplierScorer("photocathodeScorer",4);
      //photocathode_MFD->RegisterPrimitive(photocathode_PMScorer);
      //G4SDManager::GetSDMpointer()->AddNewDetector(photocathode_MFD);
-     //photocathode_log->SetSensitiveDetector(photocathode_MFD);                     
+     //photocathode_log->SetSensitiveDetector(photocathode_MFD);  
+
+       // PMT SD
+
+   if (!fPmt_SD.Get()) {
+     //Created here so it exists as pmts are being placed
+     G4cout << "Construction /HexLGDet/pmtSD" << G4endl;
+     HexLGPMTSD* pmt_SD = new HexLGPMTSD("/HexLGDet/pmtSD");
+     fPmt_SD.Put(pmt_SD);
+
+     //pmt_SD->InitPMTs(2); //let pmtSD know # of pmts
+     //pmt_SD->SetPmtPositions(0.0, 0.0, 0.0);
+   }
+   G4SDManager::GetSDMpointer()->AddNewDetector(fPmt_SD.Get());
+   //sensitive detector is not actually on the photocathode.
+   //processHits gets done manually by the stepping action.
+   //It is used to detect when photons hit and get absorbed&detected at the
+   //boundary to the photocathode (which doesnt get done by attaching it to a
+   //logical volume.
+   //It does however need to be attached to something or else it doesnt get
+   //reset at the begining of events
+
+   SetSensitiveDetector(photocathode_log, fPmt_SD.Get());                   
 
 
 
@@ -369,28 +391,6 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
 void HexLGDetectorConstruction::ConstructSDandField() {
 
   //if (!fMainVolume) return;
-
-  // PMT SD
-
-  // if (!fPmt_SD.Get()) {
-  //   //Created here so it exists as pmts are being placed
-  //   G4cout << "Construction /LXeDet/pmtSD" << G4endl;
-  //   LXePMTSD* pmt_SD = new LXePMTSD("/LXeDet/pmtSD");
-  //   fPmt_SD.Put(pmt_SD);
-
-  //   pmt_SD->InitPMTs((fNx*fNy+fNx*fNz+fNy*fNz)*2); //let pmtSD know # of pmts
-  //   pmt_SD->SetPmtPositions(fMainVolume->GetPmtPositions());
-  // }
-  // G4SDManager::GetSDMpointer()->AddNewDetector(fPmt_SD.Get());
-  // //sensitive detector is not actually on the photocathode.
-  // //processHits gets done manually by the stepping action.
-  // //It is used to detect when photons hit and get absorbed&detected at the
-  // //boundary to the photocathode (which doesnt get done by attaching it to a
-  // //logical volume.
-  // //It does however need to be attached to something or else it doesnt get
-  // //reset at the begining of events
-
-  // SetSensitiveDetector(fMainVolume->GetLogPhotoCath(), fPmt_SD.Get());
 
   // // Scint SD
 

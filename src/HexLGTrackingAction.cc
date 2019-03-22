@@ -48,16 +48,16 @@ void HexLGTrackingAction::PostUserTrackingAction(const G4Track* aTrack){
       trajectory->SetDrawTrajectory(true);
     }
 
-    if(HexLGDetectorConstruction::GetSphereOn()){
+    /*if(HexLGDetectorConstruction::GetSphereOn()){
       if((trackInformation->GetTrackStatus()&hitPMT)&&
          (trackInformation->GetTrackStatus()&hitSphere)){
         trajectory->SetDrawTrajectory(true);
       }
-    }
-    else{
+    }*/
+    //else{
       if(trackInformation->GetTrackStatus()&hitPMT)
         trajectory->SetDrawTrajectory(true);
-    }
+    //}
   }
   else //draw all other trajectories
     trajectory->SetDrawTrajectory(true);
