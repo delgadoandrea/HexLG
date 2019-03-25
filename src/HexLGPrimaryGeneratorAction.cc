@@ -26,7 +26,10 @@ HexLGPrimaryGeneratorAction::HexLGPrimaryGeneratorAction(){
   //Default energy,position,momentum
   fParticleGun->SetParticleEnergy(3.2*eV);
   fParticleGun->SetParticlePosition(G4ThreeVector(0.0 , 0.0, .0*cm));
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
+
+  //G4double angle = G4UniformRand()*360.0*deg;
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(angle),0.,cos(angle)));
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -65,6 +68,7 @@ void HexLGPrimaryGeneratorAction::SetOptPhotonPolar(G4double angle){
  G4double modul2       = product*product;
  
  G4ThreeVector e_perpend (0., 0., 1.);
+ //G4ThreeVector e_perpend (0., 1., 0.); 
  if (modul2 > 0.) e_perpend = (1./std::sqrt(modul2))*product;
  G4ThreeVector e_paralle    = e_perpend.cross(kphoton);
  

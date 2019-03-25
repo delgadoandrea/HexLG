@@ -171,7 +171,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
     G4double m_sepInside[6];
     G4double m_Envelope[6];
 
-    G4double m_HexagoneRadius = 9*cm;
+    G4double m_HexagoneRadius = 8.0*cm;
 
     G4ThreeVector dim = G4ThreeVector(14.47, 14.47, 34.924);
 
@@ -195,7 +195,12 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
   //-------------------------------------------------------------
   // Container/Separator
   //-------------------------------------------------------------   
-  G4Polyhedra *sep_solid = new G4Polyhedra("sep_vol",0, 360*deg,6,2, scint_z,  m_sepInside, m_HexagoneROuter);
+  G4Polyhedra *outer = new G4Polyhedra("volA",0, 360*deg,6,2, scint_z,  zero_array, m_HexagoneROuter);
+  G4Polyhedra *inner = new G4Polyhedra("volB",0, 360*deg,6,2, scint_z,  zero_array, m_sepInside);  
+
+  G4SubtractionSolid *sep_solid = new G4SubtractionSolid("sep_vol",outer,inner);
+
+  //G4Polyhedra *sep_solid = new G4Polyhedra("sep_vol",0, 360*deg,6,2, scint_z,  m_sepInside, m_HexagoneROuter);
   G4LogicalVolume *sep_log = new G4LogicalVolume(sep_solid, Materials::FEP, "Sep_main_log");   
   G4PVPlacement *sep_phys = new G4PVPlacement(0,                       //no rotation
                     pos1,                    //at position
@@ -241,13 +246,21 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
    G4LogicalVolume* extra_reflector_log = new G4LogicalVolume(extra_reflector,Materials::PMMA,"extra_reflector_log");
    G4LogicalVolume* extra_reflector_inside_log = new G4LogicalVolume(extra_reflector_inside,Materials::PMMA,"extra_reflector_inside_log");
 
-   G4PVPlacement* extra_reflector_phys_1 = new G4PVPlacement(nullptr,G4ThreeVector(0,0,scint_height/2.),extra_reflector_log,"extra_reflector_phys_1",scint_log,false,1,true);
-   G4PVPlacement* extra_reflector_inside_phys_1 = new G4PVPlacement(nullptr,{0,0,0},extra_reflector_inside_log,"extra_reflector_inside_phys_1",extra_reflector_log,false,1,true);
-   new G4LogicalBorderSurface("extra_reflector_border_1",extra_reflector_inside_phys_1,extra_reflector_phys_1,SurfacesHelper::S().ESR);
+   G4PVPlacement* extra_reflector_phys_1 = 
+   new G4PVPlacement(nullptr,G4ThreeVector(0,0,scint_height/2.),extra_reflector_log,"extra_reflector_phys",scint_log,false,0,true);
 
-   G4PVPlacement* extra_reflector_phys_2 = new G4PVPlacement(nullptr,G4ThreeVector(0,0,-scint_height/2.- box_front_cap_thick),extra_reflector_log,"extra_reflector_phys_2",scint_log,false,2,true);
-   G4PVPlacement* extra_reflector_inside_phys_2 = new G4PVPlacement(nullptr,{0,0,0},extra_reflector_inside_log,"extra_reflector_inside_phys_2",extra_reflector_log,false,2,true);
-   new G4LogicalBorderSurface("extra_reflector_border_2",extra_reflector_inside_phys_2,extra_reflector_phys_2,SurfacesHelper::S().ESR);
+   G4PVPlacement* extra_reflector_phys_2 =
+   new G4PVPlacement(nullptr,G4ThreeVector(0,0,-scint_height/2.- box_front_cap_thick),extra_reflector_log,"extra_reflector_phys",scint_log,false,0,true);   
+   //G4PVPlacement* extra_reflector_inside_phys_1 = new G4PVPlacement(nullptr,{0,0,0},extra_reflector_inside_log,"extra_reflector_inside_phys_1",extra_reflector_log,false,0,true);
+   //new G4LogicalBorderSurface("extra_reflector_border_1",extra_reflector_inside_phys_1,extra_reflector_phys_1,SurfacesHelper::S().ESR);
+
+   //G4PVPlacement* extra_reflector_phys_2 = 
+   //new G4PVPlacement(nullptr,G4ThreeVector(0,0,-scint_height/2.- box_front_cap_thick),extra_reflector_log,"extra_reflector_phys",scint_log,false,2,true);
+   
+   G4PVPlacement* extra_reflector_inside_phys = new G4PVPlacement(nullptr,{0,0,0},extra_reflector_inside_log,"extra_reflector_inside_phys",extra_reflector_log,false,0,true);
+   new G4LogicalBorderSurface("extra_reflector_border_1",extra_reflector_inside_phys,extra_reflector_phys_1,SurfacesHelper::S().ESR);
+   new G4LogicalBorderSurface("extra_reflector_border_2",extra_reflector_inside_phys,extra_reflector_phys_2,SurfacesHelper::S().ESR);   
+   //new G4LogicalBorderSurface("extra_reflector_border",extra_reflector_inside_phys,extra_reflector_phys,SurfacesHelper::S().ESR);   
 
    //-------------------------------------------------------------
    // PMT housing
@@ -268,7 +281,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                      "PMT_main_log_"+to_str(npm+1),                //its name
                      logicWorld,                //its mother  volume
                      false,                   //no boolean operation
-                     1,                       //copy number
+                     0,                       //copy number
                      checkOverlaps); 
    if(npm==1)new G4PVPlacement(pmt_flip,                       //no rotation
                      {0,0,-scint_height/2.-box_front_cap_thick },                    //at position
@@ -276,16 +289,17 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                      "PMT_main_log_"+to_str(npm+1),                //its name
                      logicWorld,                //its mother  volume
                      false,                   //no boolean operation
-                     2,                       //copy number
+                     0,                       //copy number
                      checkOverlaps);
-    
+    }
    //----------------------------------------------------------------------------------------------------------------------
    // Oil volume
    //---------------------------------------------------------------------------------------------------------------------- 
 
    G4Polyhedra* oil_box = new G4Polyhedra("min_oil", 0, 360*deg, 6, 2, oil_z, zero_array, m_HexagoneROuterOil);
    G4LogicalVolume* oil_log = new G4LogicalVolume(oil_box, oil_or_scint,"oil_log");
-   G4PVPlacement* oil_phys = new G4PVPlacement(nullptr,{0,0,0},oil_log,"oil_phys",m_Hexagone_log,false,npm,true);
+   G4PVPlacement* oil_phys = new G4PVPlacement(nullptr,{0,0,0},oil_log,"oil_phys",m_Hexagone_log,false,0,true);
+     //new G4LogicalBorderSurface("extra_reflector_border",oil_phys,extra_reflector_inside_phys,SurfacesHelper::S().ESR_warped);   
    //G4PVPlacement* oil_phys_2 = new G4PVPlacement(nullptr,{0,0,0},oil_log,"oil_phys",m_Hexagone_log,false,2,true);   
   
    //----------------------------------------------------------------------------------------------------------------------
@@ -311,7 +325,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      G4UnionSolid* pmt_vac=new G4UnionSolid("pmt_glass",pmt_vac_bulb,pmt_vac_stem,nullptr,G4ThreeVector(0,0,pmt_stem_length/2.+pmt_glass_thickness));
      G4LogicalVolume* pmt_vac_log = new G4LogicalVolume(pmt_vac, Materials::Vacuum,"PMT_vac_log");
      
-     new G4PVPlacement(nullptr, {0,0,0},pmt_vac_log, "PMT_vac_phys",pmt_glass_log,false,npm,true);
+     new G4PVPlacement(nullptr, {0,0,0},pmt_vac_log, "PMT_vac_phys",pmt_glass_log,false,0,true);
      //new G4PVPlacement(nullptr, {0,0,0},pmt_vac_log, "PMT_vac_phys_2",pmt_glass_log,false,2,true);     
 
 
@@ -320,7 +334,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      G4SubtractionSolid* photocathode_ell = new G4SubtractionSolid("photocathode_ell",pmt_vac_bulb,photocathode_ellcut);
      G4IntersectionSolid* photocathode = new G4IntersectionSolid("photocathode",photocathode_ell,photocathode_cylcut,0,G4ThreeVector(0,0,-10.*m));
       G4LogicalVolume* photocathode_log = new G4LogicalVolume(photocathode,Materials::Photocathode,"photocathode_log");
-      new G4PVPlacement(nullptr,{0,0,0},photocathode_log,"photocathode_phys",pmt_vac_log,false,npm,true);       
+      new G4PVPlacement(nullptr,{0,0,0},photocathode_log,"photocathode_phys",pmt_vac_log,false,0,true);       
      
 
      //new G4PVPlacement(nullptr,{0,0,0},photocathode_log,"photocathode_phys_2",pmt_vac_log,false,2,true);     
@@ -335,7 +349,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      //how far is the pmt glass from the front of the mineral oil?
      double pmt_glass_z_from_front= pmt_bulb_semiaxis+reflector_length-pmt_bulge;
 
-     new G4PVPlacement(nullptr, G4ThreeVector(0,0,pmt_glass_z_from_front),pmt_glass_log, "PMT_glass_phys",oil_log,false,npm,true);    
+     new G4PVPlacement(nullptr, G4ThreeVector(0,0,pmt_glass_z_from_front),pmt_glass_log, "PMT_glass_phys",oil_log,false,0,true);    
      //new G4PVPlacement(nullptr, G4ThreeVector(0,0,-pmt_glass_z_from_front),pmt_glass_log, "PMT_glass_phys_2",oil_log,false,2,true);         
 
    //----------------------------------------------------------------------------------------------------------------------
@@ -351,9 +365,9 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      G4LogicalVolume* reflector_log = new G4LogicalVolume(reflector,Materials::Mylar,"reflector_log");
 
 
-     G4PVPlacement* reflector_phys=new G4PVPlacement(nullptr,G4ThreeVector(0,0,0),reflector_log,"reflector_phys",oil_log,false,npm,true);
+     G4PVPlacement* reflector_phys=new G4PVPlacement(nullptr,G4ThreeVector(0,0,0),reflector_log,"reflector_phys",oil_log,false,0,true);
      new G4LogicalBorderSurface("reflector_border",oil_phys,reflector_phys,SurfacesHelper::S().ESR_warped);
-   }
+   
    //----------------------------------------------------------------------------------------------------------------------
 
      //G4MultiFunctionalDetector* photocathode_MFD = new G4MultiFunctionalDetector("photocathodeMFD");

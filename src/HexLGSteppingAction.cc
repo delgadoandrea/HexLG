@@ -106,6 +106,7 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
   G4ParticleDefinition* particleType = theTrack->GetDefinition();
   if(particleType==G4OpticalPhoton::OpticalPhotonDefinition()){
     //Optical photon only
+    if(thePostPV->GetName()=="World")theTrack->SetTrackStatus(fStopAndKill);
 
     if(thePrePV->GetName()=="Slab")
       //force drawing of photons in WLS slab
@@ -138,7 +139,7 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
     //Otherwise the boundary status may not be valid
     //Prior to Geant4.6.0-p1 this would not have been enough to check
     if(thePostPoint->GetStepStatus()==fGeomBoundary){
-      if(fExpectedNextStatus==StepTooSmall){
+      /*if(fExpectedNextStatus==StepTooSmall){
         if(boundaryStatus!=StepTooSmall){
           G4ExceptionDescription ed;
           ed << "HexLGSteppingAction::UserSteppingAction(): "
@@ -148,7 +149,7 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
           FatalException,ed,
           "Something is wrong with the surface normal or geometry");
         }
-      }
+      }*/
       fExpectedNextStatus=Undefined;
       switch(boundaryStatus){
       case Absorption:
