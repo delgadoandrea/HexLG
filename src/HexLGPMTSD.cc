@@ -15,9 +15,17 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+//HexLGPMTSD::HexLGPMTSD(G4String name)
+//  : G4VSensitiveDetector(name),fPMTHitCollection(nullptr),
+//    fPMTPositionsX(nullptr),fPMTPositionsY(nullptr),fPMTPositionsZ(nullptr)
+//{
+//  collectionName.insert("pmtHitCollection");
+//}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 HexLGPMTSD::HexLGPMTSD(G4String name)
-  : G4VSensitiveDetector(name),fPMTHitCollection(nullptr),
-    fPMTPositionsX(nullptr),fPMTPositionsY(nullptr),fPMTPositionsZ(nullptr)
+  : G4VSensitiveDetector(name),fPMTHitCollection(nullptr)
+//    fPMTPositionsX(nullptr),fPMTPositionsY(nullptr),fPMTPositionsZ(nullptr)
 {
   collectionName.insert("pmtHitCollection");
 }
@@ -35,7 +43,7 @@ HexLGPMTSD::~HexLGPMTSD() {}
     if(fPMTPositionsY)fPMTPositionsY->push_back(positions[i].y());
     if(fPMTPositionsZ)fPMTPositionsZ->push_back(positions[i].z());
   }
-}*/
+}
 
 void HexLGPMTSD::SetPmtPositions(const std::vector<G4ThreeVector>& positions)
 {
@@ -44,7 +52,7 @@ void HexLGPMTSD::SetPmtPositions(const std::vector<G4ThreeVector>& positions)
     if(fPMTPositionsY)fPMTPositionsY->push_back(positions[i].y());
     if(fPMTPositionsZ)fPMTPositionsZ->push_back(positions[i].z());
   }
-}
+}*/
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -73,6 +81,7 @@ G4bool HexLGPMTSD::ProcessHits(G4Step* ,G4TouchableHistory* ){
 
 G4bool HexLGPMTSD::ProcessHits_constStep(const G4Step* aStep,
                                        G4TouchableHistory* ){
+  G4cout << "Processing hits! " << G4endl;
 
   //need to know if this is an optical photon
   if(aStep->GetTrack()->GetDefinition()
@@ -84,9 +93,14 @@ G4bool HexLGPMTSD::ProcessHits_constStep(const G4Step* aStep,
     aStep->GetPostStepPoint()->GetTouchable()->GetReplicaNumber(1);
   G4VPhysicalVolume* physVol=
     aStep->GetPostStepPoint()->GetTouchable()->GetVolume(1);
+    //aStep->GetTrack()->GetVolume();//->GetName();
+  G4double ePhoton = 
+    aStep->GetPostStepPoint()->GetKineticEnergy();
+    
 
   //Find the correct hit collection
-  G4int n=fPMTHitCollection->entries();
+  G4int n = fPMTHitCollection->entries();
+  G4cout << "Number of hit collections: " << n << G4endl;
   HexLGPMTHit* hit = nullptr;
   for(G4int i=0;i<n;i++){
     if((*fPMTHitCollection)[i]->GetPMTNumber()==pmtNumber){
@@ -97,11 +111,14 @@ G4bool HexLGPMTSD::ProcessHits_constStep(const G4Step* aStep,
  
   if (hit == nullptr) {//this pmt wasnt previously hit in this event
     hit = new HexLGPMTHit(); //so create new hit
+
+
     hit->SetPMTNumber(pmtNumber);
     hit->SetPMTPhysVol(physVol);
+    hit->SetPMTEnergy(ePhoton);
     fPMTHitCollection->insert(hit);
-    hit->SetPMTPos((*fPMTPositionsX)[pmtNumber],(*fPMTPositionsY)[pmtNumber],
-                   (*fPMTPositionsZ)[pmtNumber]);
+    //hit->SetPMTPos((*fPMTPositionsX)[pmtNumber],(*fPMTPositionsY)[pmtNumber],
+    //               (*fPMTPositionsZ)[pmtNumber]);
   }
 
   hit->IncPhotonCount(); //increment hit for the selected pmt
@@ -113,7 +130,8 @@ G4bool HexLGPMTSD::ProcessHits_constStep(const G4Step* aStep,
   //else{//sphere enabled
     HexLGUserTrackInformation* trackInfo=
       (HexLGUserTrackInformation*)aStep->GetTrack()->GetUserInformation();
-    if(trackInfo->GetTrackStatus()&hitSphere)
+    if(trackInfo->GetTrackStatus())
+//    if(trackInfo->GetTrackStatus()&hitSphere)      
       //only draw this hit if the photon has hit the sphere first
       hit->SetDrawit(true);
   //}

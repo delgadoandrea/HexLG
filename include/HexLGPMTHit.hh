@@ -43,11 +43,13 @@ class HexLGPMTHit : public G4VHit
     inline void SetPMTPhysVol(G4VPhysicalVolume* physVol){this->fPhysVol=physVol;}
     inline G4VPhysicalVolume* GetPMTPhysVol(){return fPhysVol;}
 
-    inline void SetPMTPos(G4double x,G4double y,G4double z){
-      fPos=G4ThreeVector(x,y,z);
-    }
+    //inline void SetPMTPos(G4double x,G4double y,G4double z){
+    //  fPos=G4ThreeVector(x,y,z);
+    //}
+    inline void SetPMTEnergy(G4double e){fPhotEnergy = e;}
+    inline G4double GetPhotEnergy(){return fPhotEnergy;}
  
-    inline G4ThreeVector GetPMTPos(){return fPos;}
+    //inline G4ThreeVector GetPMTPos(){return fPos;}
 
   private:
 
@@ -55,6 +57,7 @@ class HexLGPMTHit : public G4VHit
     G4int fPhotons;
     G4ThreeVector fPos;
     G4VPhysicalVolume* fPhysVol;
+    G4double fPhotEnergy;
     G4bool fDrawit;
 
 };

@@ -5,6 +5,7 @@
 #include "globals.hh"
 
 class HexLGEventAction;
+class HexLGPrimaryGeneratorMessenger;
 class G4UIcmdWithAnInteger;
 class G4UIcmdWithABool;
 
@@ -20,6 +21,7 @@ class HexLGEventMessenger: public G4UImessenger
   private:
 
     HexLGEventAction*      fHexLGEvent;
+    HexLGPrimaryGeneratorMessenger* fPrimaryGenerator; 
     G4UIcmdWithAnInteger*  fVerboseCmd;
     G4UIcmdWithAnInteger*  fPmtThresholdCmd;
     G4UIcmdWithABool*      fForceDrawPhotonsCmd;

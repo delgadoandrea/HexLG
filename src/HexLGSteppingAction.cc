@@ -94,7 +94,7 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
       }
     }
 
-    if(fOneStepPrimaries&&thePrePV->GetName()=="scintillator")
+    if(fOneStepPrimaries&&thePrePV->GetName()=="World")
       theTrack->SetTrackStatus(fStopAndKill);
   }
 
@@ -119,6 +119,17 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
        =="OpAbsorption"){
       fEventAction->IncAbsorption();
       trackInformation->AddTrackStatusFlag(absorbed);
+      if(thePostPV->GetName() == "photocathode_phys")
+        {
+        //Triger sensitive detector manually since photon is
+        //absorbed but status was Detection
+        G4SDManager* SDman = G4SDManager::GetSDMpointer();
+        G4String sdName="/HexLGDet/pmtSD";
+        G4cout << "sdname: " << sdName << G4endl;
+        HexLGPMTSD* pmtSD = (HexLGPMTSD*)SDman->FindSensitiveDetector(sdName);
+        if(pmtSD)pmtSD->ProcessHits_constStep(theStep, nullptr);
+        trackInformation->AddTrackStatusFlag(hitPMT);
+        }
     }
 
     boundaryStatus=boundary->GetStatus();
@@ -143,10 +154,24 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
       case Absorption:
         trackInformation->AddTrackStatusFlag(boundaryAbsorbed);
         fEventAction->IncBoundaryAbsorption();
+//        break;
+        if(thePostPV->GetName() == "photocathode_phys")
+        {
+        //Triger sensitive detector manually since photon is
+        //absorbed but status was Detection
+        G4SDManager* SDman = G4SDManager::GetSDMpointer();
+        G4String sdName="/HexLGDet/pmtSD";
+        G4cout << "sdname: " << G4endl;
+        HexLGPMTSD* pmtSD = (HexLGPMTSD*)SDman->FindSensitiveDetector(sdName);
+        if(pmtSD)pmtSD->ProcessHits_constStep(theStep, nullptr);
+        trackInformation->AddTrackStatusFlag(hitPMT);
+        break;
+        }
         break;
       case Detection: //Note, this assumes that the volume causing detection
                       //is the photocathode because it is the only one with
                       //non-zero efficiency
+        if(thePostPV->GetName() == "photocathode_phys")
         {
         //Triger sensitive detector manually since photon is
         //absorbed but status was Detection

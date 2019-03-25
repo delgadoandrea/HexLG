@@ -25,6 +25,7 @@ HexLGEventAction::HexLGEventAction(const HexLGDetectorConstruction* det)
    fPMTThreshold(1),fForcedrawphotons(false),fForcenophotons(false)
 {
   fEventMessenger = new HexLGEventMessenger(this);
+  //fPrimaryGenerator = new HexLGPrimaryGeneratorMessenger(this);
 
   fHitCount = 0;
   fPhotonCount_Scint = 0;
@@ -142,12 +143,12 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
   }
  
   if(pmtHC){
-    G4ThreeVector reconPos(0.,0.,0.);
+    //G4ThreeVector reconPos(0.,0.,0.);
     G4int pmts=pmtHC->entries();
     //Gather info from all PMTs
     for(G4int i=0;i<pmts;i++){
       fHitCount += (*pmtHC)[i]->GetPhotonCount();
-      reconPos+=(*pmtHC)[i]->GetPMTPos()*(*pmtHC)[i]->GetPhotonCount();
+      //reconPos+=(*pmtHC)[i]->GetPMTPos()*(*pmtHC)[i]->GetPhotonCount();
       if((*pmtHC)[i]->GetPhotonCount()>=fPMTThreshold){
         fPMTsAboveThreshold++;
       }
@@ -159,14 +160,14 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
     G4AnalysisManager::Instance()->FillH1(1, fHitCount);
     G4AnalysisManager::Instance()->FillH1(2, fPMTsAboveThreshold);
 
-    if(fHitCount > 0) {//dont bother unless there were hits
+    /*if(fHitCount > 0) {//dont bother unless there were hits
       reconPos/=fHitCount;
       if(fVerbose>0){
         G4cout << "\tReconstructed position of hits in HexLG : "
                << reconPos/mm << G4endl;
       }
       fReconPos = reconPos;
-    }
+    }*/
     pmtHC->DrawAllHits();
   }
 

@@ -55,3 +55,8 @@ endforeach()
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS HexLG DESTINATION bin)
+
+set(
+  vis.mac
+  photon.mac
+  )

@@ -3,6 +3,7 @@
 
 #include "G4DataVector.hh"
 #include "G4VSensitiveDetector.hh"
+#include "G4VProcess.hh"
 #include "HexLGPMTHit.hh"
 
 #include <vector>
@@ -30,25 +31,25 @@ class HexLGPMTSD : public G4VSensitiveDetector
     void PrintAll();
  
     //Initialize the arrays to store pmt possitions
-    inline void InitPMTs(G4int nPMTs){
+    /*inline void InitPMTs(G4int nPMTs){
       if(fPMTPositionsX)delete fPMTPositionsX;
       if(fPMTPositionsY)delete fPMTPositionsY;
       if(fPMTPositionsZ)delete fPMTPositionsZ;
       fPMTPositionsX=new G4DataVector(nPMTs);
       fPMTPositionsY=new G4DataVector(nPMTs);
       fPMTPositionsZ=new G4DataVector(nPMTs);
-    }
+    }*/
 
     //Store a pmt position
-    void SetPmtPositions(const std::vector<G4ThreeVector>& positions);
+    //void SetPmtPositions(const std::vector<G4ThreeVector>& positions);
 
   private:
 
     HexLGPMTHitsCollection* fPMTHitCollection;
 
-    G4DataVector* fPMTPositionsX;
-    G4DataVector* fPMTPositionsY;
-    G4DataVector* fPMTPositionsZ;
+    //G4DataVector* fPMTPositionsX;
+    //G4DataVector* fPMTPositionsY;
+    //G4DataVector* fPMTPositionsZ;
 };
 
 #endif

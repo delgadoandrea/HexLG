@@ -33,7 +33,7 @@ class HexLGDetectorConstruction : public G4VUserDetectorConstruction
    private:
    	   //Sensitive Detectors
     //G4Cache<HexLGScintSD*> fScint_SD;
-    G4Cache<HexLGPMTSD*> fPmt_SD;
+    G4Cache<HexLGPMTSD*> fPmt_SD; //Right
 
 };
 

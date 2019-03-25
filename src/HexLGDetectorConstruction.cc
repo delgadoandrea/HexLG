@@ -2,6 +2,7 @@
 #include "MaterialsHelper.hh"
 #include "SurfacesHelper.hh"
 #include "HexLGPMTSD.hh"
+#include "StringManip.hh"
 //#include "LXeScintSD.hh"
 //#include "LXeDetectorMessenger.hh"
 //#include "LXeMainVolume.hh"
@@ -206,7 +207,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                     checkOverlaps); 
   //G4Polyhedra *core = new G4Polyhedra("SeparatorCore", 0, 360*deg,6,2, scint_z, zero_array, m_Envelope);
   //G4LogicalVolume* core_log = new G4LogicalVolume(core, Materials::CarbonFiber, "Separator_core");
-  //new G4PVPlacement(NULL, {0,0,0},core_log,"Separator_core",sep_log,false, 0, true);
+  //new G4PVPlacement(NULL, {0,0,0},core_log,"Separator_core",sep_log,false, 0, true);  
 
   //new G4LogicalSkinSurface("SepOpticalSkin", core_log, SurfacesHelper::S().ESR);
 
@@ -260,30 +261,31 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
    G4LogicalVolume* m_Hexagone_log
        = new G4LogicalVolume(m_Hexagone_solid, Materials::PMMA_black,"PMT_main_log");      
 
-    new G4PVPlacement(0,                       //no rotation
+  for(unsigned int npm = 0; npm < 2; npm++){
+   if(npm==0)new G4PVPlacement(0,                       //no rotation
                      {0,0,scint_height/2. + box_front_cap_thick },                    //at position
                      m_Hexagone_log,             //its logical volume
-                     "PMT_main_log_1",                //its name
+                     "PMT_main_log_"+to_str(npm+1),                //its name
                      logicWorld,                //its mother  volume
                      false,                   //no boolean operation
                      1,                       //copy number
                      checkOverlaps); 
-    new G4PVPlacement(pmt_flip,                       //no rotation
+   if(npm==1)new G4PVPlacement(pmt_flip,                       //no rotation
                      {0,0,-scint_height/2.-box_front_cap_thick },                    //at position
                      m_Hexagone_log,             //its logical volume
-                     "PMT_main_log_2",                //its name
+                     "PMT_main_log_"+to_str(npm+1),                //its name
                      logicWorld,                //its mother  volume
                      false,                   //no boolean operation
                      2,                       //copy number
                      checkOverlaps);
-  
+    
    //----------------------------------------------------------------------------------------------------------------------
    // Oil volume
    //---------------------------------------------------------------------------------------------------------------------- 
 
    G4Polyhedra* oil_box = new G4Polyhedra("min_oil", 0, 360*deg, 6, 2, oil_z, zero_array, m_HexagoneROuterOil);
    G4LogicalVolume* oil_log = new G4LogicalVolume(oil_box, oil_or_scint,"oil_log");
-   G4PVPlacement* oil_phys_1 = new G4PVPlacement(nullptr,{0,0,0},oil_log,"oil_phys",m_Hexagone_log,false,1,true);
+   G4PVPlacement* oil_phys = new G4PVPlacement(nullptr,{0,0,0},oil_log,"oil_phys",m_Hexagone_log,false,npm,true);
    //G4PVPlacement* oil_phys_2 = new G4PVPlacement(nullptr,{0,0,0},oil_log,"oil_phys",m_Hexagone_log,false,2,true);   
   
    //----------------------------------------------------------------------------------------------------------------------
@@ -309,7 +311,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      G4UnionSolid* pmt_vac=new G4UnionSolid("pmt_glass",pmt_vac_bulb,pmt_vac_stem,nullptr,G4ThreeVector(0,0,pmt_stem_length/2.+pmt_glass_thickness));
      G4LogicalVolume* pmt_vac_log = new G4LogicalVolume(pmt_vac, Materials::Vacuum,"PMT_vac_log");
      
-     new G4PVPlacement(nullptr, {0,0,0},pmt_vac_log, "PMT_vac_phys",pmt_glass_log,false,1,true);
+     new G4PVPlacement(nullptr, {0,0,0},pmt_vac_log, "PMT_vac_phys",pmt_glass_log,false,npm,true);
      //new G4PVPlacement(nullptr, {0,0,0},pmt_vac_log, "PMT_vac_phys_2",pmt_glass_log,false,2,true);     
 
 
@@ -317,9 +319,10 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      G4Tubs* photocathode_cylcut = new G4Tubs("photocathode_cylcut",0,photocathode_diameter/2.,10*m,0,2*M_PI);
      G4SubtractionSolid* photocathode_ell = new G4SubtractionSolid("photocathode_ell",pmt_vac_bulb,photocathode_ellcut);
      G4IntersectionSolid* photocathode = new G4IntersectionSolid("photocathode",photocathode_ell,photocathode_cylcut,0,G4ThreeVector(0,0,-10.*m));
-     G4LogicalVolume* photocathode_log = new G4LogicalVolume(photocathode,Materials::Photocathode,"photocathode_log");
+      G4LogicalVolume* photocathode_log = new G4LogicalVolume(photocathode,Materials::Photocathode,"photocathode_log");
+      new G4PVPlacement(nullptr,{0,0,0},photocathode_log,"photocathode_phys",pmt_vac_log,false,npm,true);       
      
-     new G4PVPlacement(nullptr,{0,0,0},photocathode_log,"photocathode_phys",pmt_vac_log,false,1,true);
+
      //new G4PVPlacement(nullptr,{0,0,0},photocathode_log,"photocathode_phys_2",pmt_vac_log,false,2,true);     
 
      double reflector_pmtside_opening = 103.897*mm;
@@ -332,7 +335,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      //how far is the pmt glass from the front of the mineral oil?
      double pmt_glass_z_from_front= pmt_bulb_semiaxis+reflector_length-pmt_bulge;
 
-     new G4PVPlacement(nullptr, G4ThreeVector(0,0,pmt_glass_z_from_front),pmt_glass_log, "PMT_glass_phys",oil_log,false,1,true);    
+     new G4PVPlacement(nullptr, G4ThreeVector(0,0,pmt_glass_z_from_front),pmt_glass_log, "PMT_glass_phys",oil_log,false,npm,true);    
      //new G4PVPlacement(nullptr, G4ThreeVector(0,0,-pmt_glass_z_from_front),pmt_glass_log, "PMT_glass_phys_2",oil_log,false,2,true);         
 
    //----------------------------------------------------------------------------------------------------------------------
@@ -348,9 +351,9 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      G4LogicalVolume* reflector_log = new G4LogicalVolume(reflector,Materials::Mylar,"reflector_log");
 
 
-     G4PVPlacement* reflector_phys=new G4PVPlacement(nullptr,G4ThreeVector(0,0,0),reflector_log,"reflector_phys",oil_log,false,0,true);
-     new G4LogicalBorderSurface("reflector_border",oil_phys_1,reflector_phys,SurfacesHelper::S().ESR_warped);
-
+     G4PVPlacement* reflector_phys=new G4PVPlacement(nullptr,G4ThreeVector(0,0,0),reflector_log,"reflector_phys",oil_log,false,npm,true);
+     new G4LogicalBorderSurface("reflector_border",oil_phys,reflector_phys,SurfacesHelper::S().ESR_warped);
+   }
    //----------------------------------------------------------------------------------------------------------------------
 
      //G4MultiFunctionalDetector* photocathode_MFD = new G4MultiFunctionalDetector("photocathodeMFD");
@@ -359,12 +362,48 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
      //G4SDManager::GetSDMpointer()->AddNewDetector(photocathode_MFD);
      //photocathode_log->SetSensitiveDetector(photocathode_MFD);  
 
-       // PMT SD
+    // PMT SD Optical Surface Properties
 
-   if (!fPmt_SD.Get()) {
+     /*G4OpticalSurface* photonDetSurface = new G4OpticalSurface("PhotonDetSurface", unified, ground, dielectric_metal );
+
+     G4MaterialPropertiesTable* photonDetSurfaceProperty = new G4MaterialPropertiesTable();
+
+     G4double p_mppc[] = {2.0*eV, 3.47*eV};
+     const G4int nbins = sizeof(p_mppc)/sizeof(G4double);
+     G4double refl_mppc[] = {1.0,1.0};
+     assert(sizeof(refl_mppc) == sizeof(p_mppc));
+     G4double effi_mppc[] = {1, 1};
+     assert(sizeof(effi_mppc) == sizeof(p_mppc));
+     G4double SpecularLobe2[] = {1.0,1.0};
+     assert(sizeof(SpecularLobe2) == sizeof(p_mppc));
+     G4double SpecularSpike2[] = {0.0, 0.0};
+     assert(sizeof(SpecularSpike2) == sizeof(p_mppc));
+     G4double Backscatter2[] = {0.0, 0.0};
+     assert(sizeof(Backscatter2) == sizeof(p_mppc));
+ 
+     photonDetSurfaceProperty->AddProperty("REFLECTIVITY",p_mppc,refl_mppc,nbins);
+     photonDetSurfaceProperty->AddProperty("EFFICIENCY",p_mppc,effi_mppc,nbins);
+     photonDetSurfaceProperty->AddProperty("SPECULARLOBECONSTANT", p_mppc, SpecularLobe2, nbins);
+     photonDetSurfaceProperty->AddProperty("SPECULARSPIKECONSTANT", p_mppc, SpecularSpike2, nbins);
+     photonDetSurfaceProperty->AddProperty("BACKSCATTERCONSTANT", p_mppc, Backscatter2, nbins);
+
+     photonDetSurface->SetMaterialPropertiesTable(photonDetSurfaceProperty);
+
+     new G4LogicalSkinSurface("PhotonDetSurface",photocathode_log,photonDetSurface);*/
+            
+  return physWorld;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void HexLGDetectorConstruction::ConstructSDandField() {
+
+  if (!fPmt_SD.Get()) {
      //Created here so it exists as pmts are being placed
      G4cout << "Construction /HexLGDet/pmtSD" << G4endl;
+     //G4MultiFunctionalDetector* photocathode_MFD = new G4MultiFunctionalDetector("photocathodeMFD");     
      HexLGPMTSD* pmt_SD = new HexLGPMTSD("/HexLGDet/pmtSD");
+     //photocathode_MFD->RegisterPrimitive(pmt_SD);
      fPmt_SD.Put(pmt_SD);
 
      //pmt_SD->InitPMTs(2); //let pmtSD know # of pmts
@@ -379,16 +418,19 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
    //It does however need to be attached to something or else it doesnt get
    //reset at the begining of events
 
-   SetSensitiveDetector(photocathode_log, fPmt_SD.Get());                   
+   SetSensitiveDetector("photocathode_log", fPmt_SD.Get(),true); 
 
+   /*if(!fPmt_SD2.Get()){
 
+    G4cout << "Construction /HexLGDet/pmtSD2" << G4endl;
+     //G4MultiFunctionalDetector* photocathode_MFD = new G4MultiFunctionalDetector("photocathodeMFD");     
+    HexLGPMTSD* pmt_SD2 = new HexLGPMTSD("/HexLGDet/pmtSD2");
+     //photocathode_MFD->RegisterPrimitive(pmt_SD);
+     fPmt_SD2.Put(pmt_SD2);
 
-  return physWorld;
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void HexLGDetectorConstruction::ConstructSDandField() {
+   }
+      G4SDManager::GetSDMpointer()->AddNewDetector(fPmt_SD2.Get());
+    SetSensitiveDetector("photocathode_log_2", fPmt_SD2.Get(),true);  */     
 
   //if (!fMainVolume) return;
 

@@ -11,7 +11,7 @@ G4ThreadLocal G4Allocator<HexLGPMTHit>* HexLGPMTHitAllocator=0;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGPMTHit::HexLGPMTHit()
-  : fPmtNumber(-1),fPhotons(0),fPhysVol(nullptr),fDrawit(false) {}
+  : fPmtNumber(-1),fPhotons(0),fPhysVol(nullptr),fDrawit(false),fPhotEnergy(0.0) {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -24,6 +24,7 @@ HexLGPMTHit::HexLGPMTHit(const HexLGPMTHit &right) : G4VHit()
   fPmtNumber=right.fPmtNumber;
   fPhotons=right.fPhotons;
   fPhysVol=right.fPhysVol;
+  fPhotEnergy=right.fPhotEnergy;
   fDrawit=right.fDrawit;
 }
 
@@ -33,6 +34,7 @@ const HexLGPMTHit& HexLGPMTHit::operator=(const HexLGPMTHit &right){
   fPmtNumber = right.fPmtNumber;
   fPhotons=right.fPhotons;
   fPhysVol=right.fPhysVol;
+  fPhotEnergy=right.fPhotEnergy;
   fDrawit=right.fDrawit;
   return *this;
 }
@@ -52,11 +54,12 @@ void HexLGPMTHit::Draw(){
     if(pVVisManager){//Make sure that the VisManager exists
       G4VisAttributes attribs(G4Colour(1.,0.,0.));
       attribs.SetForceSolid(true);
-      G4RotationMatrix rot;
-      if(fPhysVol->GetRotation())//If a rotation is defined use it
-        rot=*(fPhysVol->GetRotation());
-      G4Transform3D trans(rot,fPhysVol->GetTranslation());//Create transform
-      pVVisManager->Draw(*fPhysVol,attribs,trans);//Draw it
+      //G4RotationMatrix rot;
+      //if(fPhysVol->GetRotation())//If a rotation is defined use it
+      //  rot=*(fPhysVol->GetRotation());
+      //G4Transform3D trans(rot,fPhysVol->GetTranslation());//Create transform
+      //pVVisManager->Draw(*fPhysVol,attribs);//Draw it
+//      pVVisManager->Draw(*fPhysVol,attribs,trans);//Draw it      
     }
   }
 }

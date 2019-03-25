@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/HexLG.dir/src/HexLGPMTHit.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGPMTSD.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorAction.cc.o"
+  "CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorMessenger.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGRun.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o"
