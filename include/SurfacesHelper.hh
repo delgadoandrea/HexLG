@@ -22,6 +22,7 @@ public:
     G4OpticalSurface* ESR_warped; //aka 3M foi
     G4OpticalSurface* Black;
     G4OpticalSurface* FEP5mil;
+    G4OpticalSurface* LUTtest;
     
     G4OpticalSurface* GenericSpecular(G4double reflectivity);
     

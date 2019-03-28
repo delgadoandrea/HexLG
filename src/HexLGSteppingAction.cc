@@ -133,6 +133,24 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
         }
     }
 
+    //if(thePostPoint->GetProcessDefinedStep()->GetProcessName()
+    //   =="Transportation"){
+      //fEventAction->IncAbsorption();
+      //trackInformation->AddTrackStatusFlag(absorbed);
+      if(thePrePV->GetName() == "photocathode_phys" && thePostPV->GetName()!="photocathode_phys")
+        {
+        //Triger sensitive detector manually since photon is
+        //absorbed but status was Detection
+        G4SDManager* SDman = G4SDManager::GetSDMpointer();
+        G4String sdName="/HexLGDet/pmtSD";
+        G4cout << "sdname: " << sdName << G4endl;
+        HexLGPMTSD* pmtSD = (HexLGPMTSD*)SDman->FindSensitiveDetector(sdName);
+        if(pmtSD)pmtSD->ProcessHits_constStep(theStep, nullptr);
+        trackInformation->AddTrackStatusFlag(hitPMT);
+        theTrack->SetTrackStatus(fStopAndKill);
+        }
+    //}
+
     boundaryStatus=boundary->GetStatus();
 
     //Check to see if the partcile was actually at a boundary
@@ -163,6 +181,7 @@ void HexLGSteppingAction::UserSteppingAction(const G4Step * theStep){
         G4SDManager* SDman = G4SDManager::GetSDMpointer();
         G4String sdName="/HexLGDet/pmtSD";
         G4cout << "sdname: " << G4endl;
+        G4cout << "Photon absorbed at the Photocathode " << sdName << G4endl;        
         HexLGPMTSD* pmtSD = (HexLGPMTSD*)SDman->FindSensitiveDetector(sdName);
         if(pmtSD)pmtSD->ProcessHits_constStep(theStep, nullptr);
         trackInformation->AddTrackStatusFlag(hitPMT);

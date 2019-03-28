@@ -127,7 +127,17 @@ SurfacesHelper::SurfacesHelper() {
         surf->SetFinish(ground);
         surf->SetSigmaAlpha(.2);
     }
-    FEP5mil = new G4OpticalSurface("FEP5mil",unified,ground,dielectric_dielectric);
+//    FEP5mil = new G4OpticalSurface("FEP5mil",unified,ground,dielectric_dielectric);
+
+    LUTtest = new G4OpticalSurface("LUTtest");{
+        G4OpticalSurface* surf = LUTtest;
+
+        surf->SetType(dielectric_LUT);
+        surf->SetModel(LUT);
+        surf->SetFinish(polishedteflonair);
+    }
+
+    FEP5mil = new G4OpticalSurface("FEP5mil",unified,groundbackpainted,dielectric_dielectric);    
     {//anonymous scope
         G4OpticalSurface* surf = FEP5mil;
         const G4int nE = 20;                         // Edit: number of photon energies to specify
@@ -138,23 +148,28 @@ SurfacesHelper::SurfacesHelper() {
 //            Reflectivity[i]=Reflectivity_backwards[nE-1-i];
 //            Transmittance[i]=1-Reflectivity[i];
         }
-//        G4double Efficiency[nE]    = { 0 };
+        G4double Efficiency[nE]    = { 0 };
         G4double SpecularLobe[nE];
-        init_array_flat(SpecularLobe, 0.08, nE);
+//        init_array_flat(SpecularLobe, 0.08, nE);
+        init_array_flat(SpecularLobe, 1.0, nE);        
         G4double SpecularSpike[nE];
-        init_array_flat(SpecularSpike, 0.92, nE);
+//        init_array_flat(SpecularSpike, 0.92, nE);
+        init_array_flat(SpecularSpike, 0.0, nE);        
 //        G4double Backscatter[nE]   = { 0 };
+                G4double Reflectivity[nE];//AD
+        init_array_flat(Reflectivity, 1.0, nE);//AD
 
         G4MaterialPropertiesTable* mst = new G4MaterialPropertiesTable();
         
 //        mst->AddProperty("TRANSMITTANCE", Ephoton, Transmittance, nE);
-//        mst->AddProperty("EFFICIENCY", Ephoton, Efficiency, nE);
+        mst->AddProperty("EFFICIENCY", Ephoton, Efficiency, nE);
         mst->AddProperty("SPECULARLOBECONSTANT", Ephoton, SpecularLobe, nE);
         mst->AddProperty("SPECULARSPIKECONSTANT", Ephoton, SpecularSpike, nE);
+        mst->AddProperty("REFLECTIVITY", Ephoton, Reflectivity, nE);
 //        mst->AddProperty("BACKSCATTERCONSTANT", Ephoton, Backscatter, nE);
         
         surf->SetMaterialPropertiesTable(mst);
-        surf->SetSigmaAlpha(M_PI/4.);
+        surf->SetSigmaAlpha(4.0*deg);
     }
     
     Black=GenericSpecular(0);

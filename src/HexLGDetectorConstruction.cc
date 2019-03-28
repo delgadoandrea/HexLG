@@ -232,6 +232,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                      checkOverlaps); 
 
    new G4LogicalBorderSurface("SepOpticalBorderFEP", scint_phys, sep_phys, SurfacesHelper::S().FEP5mil);
+   //new G4LogicalBorderSurface("SepOpticalBorderFEP", scint_phys, sep_phys, SurfacesHelper::S().LUTtest);   
 
    G4Region* scvolregion = new G4Region("ScintVol");
    scvolregion->AddRootLogicalVolume(scint_log);
@@ -274,24 +275,26 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
    G4LogicalVolume* m_Hexagone_log
        = new G4LogicalVolume(m_Hexagone_solid, Materials::PMMA_black,"PMT_main_log");      
 
-  for(unsigned int npm = 0; npm < 2; npm++){
-   if(npm==0)new G4PVPlacement(0,                       //no rotation
+  //for(unsigned int npm = 0; npm < 2; npm++){
+//   if(npm==0)new G4PVPlacement(0,                       //no rotation
+   new G4PVPlacement(0,                       //no rotation    
                      {0,0,scint_height/2. + box_front_cap_thick },                    //at position
                      m_Hexagone_log,             //its logical volume
-                     "PMT_main_log_"+to_str(npm+1),                //its name
+                     "PMT_main_log",                //its name
+//                     "PMT_main_log_"+to_str(npm+1),                //its name                     
                      logicWorld,                //its mother  volume
                      false,                   //no boolean operation
                      0,                       //copy number
                      checkOverlaps); 
-   if(npm==1)new G4PVPlacement(pmt_flip,                       //no rotation
-                     {0,0,-scint_height/2.-box_front_cap_thick },                    //at position
-                     m_Hexagone_log,             //its logical volume
-                     "PMT_main_log_"+to_str(npm+1),                //its name
-                     logicWorld,                //its mother  volume
-                     false,                   //no boolean operation
-                     0,                       //copy number
-                     checkOverlaps);
-    }
+   //if(npm==1)new G4PVPlacement(pmt_flip,                       //no rotation
+   //                  {0,0,-scint_height/2.-box_front_cap_thick },                    //at position
+   //                  m_Hexagone_log,             //its logical volume
+   //                  "PMT_main_log_"+to_str(npm+1),                //its name
+   //                  logicWorld,                //its mother  volume
+   //                  false,                   //no boolean operation
+   //                  0,                       //copy number
+   //                  checkOverlaps);
+    //}
    //----------------------------------------------------------------------------------------------------------------------
    // Oil volume
    //---------------------------------------------------------------------------------------------------------------------- 
