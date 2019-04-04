@@ -150,6 +150,20 @@ G4PhysicalConstants.hh
 G4SystemOfUnits.hh
 /Users/1zd/HexLG/src/G4SystemOfUnits.hh
 
+/Users/1zd/HexLG/src/SurfacesHelper.cc
+SurfacesHelper.hh
+/Users/1zd/HexLG/src/SurfacesHelper.hh
+StringManip.hh
+/Users/1zd/HexLG/src/StringManip.hh
+G4SystemOfUnits.hh
+-
+G4ios.hh
+-
+G4MaterialPropertiesTable.hh
+-
+CLHEP/Units/PhysicalConstants.h
+-
+
 /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h
 iosfwd
 -

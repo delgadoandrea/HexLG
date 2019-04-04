@@ -231,8 +231,8 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                      0,                       //copy number
                      checkOverlaps); 
 
-   new G4LogicalBorderSurface("SepOpticalBorderFEP", scint_phys, sep_phys, SurfacesHelper::S().FEP5mil);
-   //new G4LogicalBorderSurface("SepOpticalBorderFEP", scint_phys, sep_phys, SurfacesHelper::S().LUTtest);   
+   //new G4LogicalBorderSurface("SepOpticalBorderFEP", scint_phys, sep_phys, SurfacesHelper::S().FEP5mil);
+   new G4LogicalBorderSurface("SepOpticalBorderFEP", scint_phys, sep_phys, SurfacesHelper::S().LUTtest);   
 
    G4Region* scvolregion = new G4Region("ScintVol");
    scvolregion->AddRootLogicalVolume(scint_log);
