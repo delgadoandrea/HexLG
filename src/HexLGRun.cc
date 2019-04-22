@@ -1,5 +1,17 @@
 #include "HexLGRun.hh"
 #include "G4SystemOfUnits.hh"
+#include "HexLGHistoManager.hh"
+
+#include "G4EventManager.hh"
+#include "G4SDManager.hh"
+#include "G4RunManager.hh"
+#include "G4Event.hh"
+#include "G4EventManager.hh"
+#include "G4TrajectoryContainer.hh"
+#include "G4Trajectory.hh"
+#include "G4VVisManager.hh"
+#include "G4ios.hh"
+#include "G4UImanager.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -63,6 +75,9 @@ void HexLGRun::EndOfRun()
   else rms_hits = 0.;
   G4cout << "Number of hits per event:\t " << hits << " +- " << rms_hits 
          << G4endl;
+
+  //auto analysisManager = G4AnalysisManager::Instance();
+  //analysisManager->FillH3(1,1.,0.25,0.25);
 
   G4double hitsAbove = G4double(fPMTsAboveThreshold)/n_evt;
   G4double hitsAbove2 = G4double(fPMTsAboveThreshold2)/n_evt;

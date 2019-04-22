@@ -6,7 +6,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGHistoManager::HexLGHistoManager()
-  : fFileName("HexLG")
+  : fFileName("HexLG.root")
 {
   Book();
 }
@@ -27,6 +27,7 @@ void HexLGHistoManager::Book()
   // in HexLGHistoManager.hh
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetFileName(fFileName);
+  //analysisManager->OpenFile(fFileName);
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetActivation(true);    // enable inactivation of histograms
 
@@ -54,6 +55,8 @@ void HexLGHistoManager::Book()
   for (auto histogram : histograms) {
     G4int ih = analysisManager->
       CreateH1("h" + histogram.first, histogram.second, nbins, vmin, vmax);
-    analysisManager->SetH1Activation(ih, false);
+    analysisManager->SetH1Activation(ih, true);
   }
+
+  analysisManager->CreateH2("test", "test", 10,-5.,5., 10,-5.,5.);
 }

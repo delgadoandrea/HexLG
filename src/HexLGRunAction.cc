@@ -29,9 +29,9 @@ G4Run* HexLGRunAction::GenerateRun()
 void HexLGRunAction::BeginOfRunAction(const G4Run*)
 {
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  if (analysisManager->IsActive()) {
+  //if (analysisManager->IsActive()) {
     analysisManager->OpenFile();
-  }
+  //}
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

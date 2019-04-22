@@ -14,18 +14,8 @@
 #include "G4ParticleDefinition.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-//HexLGPMTSD::HexLGPMTSD(G4String name)
-//  : G4VSensitiveDetector(name),fPMTHitCollection(nullptr),
-//    fPMTPositionsX(nullptr),fPMTPositionsY(nullptr),fPMTPositionsZ(nullptr)
-//{
-//  collectionName.insert("pmtHitCollection");
-//}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 HexLGPMTSD::HexLGPMTSD(G4String name)
   : G4VSensitiveDetector(name),fPMTHitCollection(nullptr)
-//    fPMTPositionsX(nullptr),fPMTPositionsY(nullptr),fPMTPositionsZ(nullptr)
 {
   collectionName.insert("pmtHitCollection");
 }
@@ -33,26 +23,6 @@ HexLGPMTSD::HexLGPMTSD(G4String name)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGPMTSD::~HexLGPMTSD() {}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-/*void HexLGPMTSD::SetPmtPositions(const std::vector<G4ThreeVector>& positions)
-{
-  for (G4int i=0; i<G4int(positions.size()); ++i) {
-    if(fPMTPositionsX)fPMTPositionsX->push_back(positions[i].x());
-    if(fPMTPositionsY)fPMTPositionsY->push_back(positions[i].y());
-    if(fPMTPositionsZ)fPMTPositionsZ->push_back(positions[i].z());
-  }
-}
-
-void HexLGPMTSD::SetPmtPositions(const std::vector<G4ThreeVector>& positions)
-{
-  for (G4int i=0; i<G4int(positions.size()); ++i) {
-    if(fPMTPositionsX)fPMTPositionsX->push_back(positions[i].x());
-    if(fPMTPositionsY)fPMTPositionsY->push_back(positions[i].y());
-    if(fPMTPositionsZ)fPMTPositionsZ->push_back(positions[i].z());
-  }
-}*/
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -96,6 +66,8 @@ G4bool HexLGPMTSD::ProcessHits_constStep(const G4Step* aStep,
     //aStep->GetTrack()->GetVolume();//->GetName();
   G4double ePhoton = 
     aStep->GetPostStepPoint()->GetKineticEnergy();
+  G4ThreeVector pos=
+    aStep->GetPostStepPoint()->GetPosition();
     
 
   //Find the correct hit collection
@@ -116,25 +88,20 @@ G4bool HexLGPMTSD::ProcessHits_constStep(const G4Step* aStep,
     hit->SetPMTNumber(pmtNumber);
     hit->SetPMTPhysVol(physVol);
     hit->SetPMTEnergy(ePhoton);
+    hit->SetPMTPos(pos);
     fPMTHitCollection->insert(hit);
+
     //hit->SetPMTPos((*fPMTPositionsX)[pmtNumber],(*fPMTPositionsY)[pmtNumber],
     //               (*fPMTPositionsZ)[pmtNumber]);
   }
 
   hit->IncPhotonCount(); //increment hit for the selected pmt
- 
-  /*if(!HexLGDetectorConstruction::GetSphereOn()){
-    hit->SetDrawit(true);
-    //If the sphere is disabled then this hit is automaticaly drawn
-  }*/
-  //else{//sphere enabled
+
     HexLGUserTrackInformation* trackInfo=
       (HexLGUserTrackInformation*)aStep->GetTrack()->GetUserInformation();
     if(trackInfo->GetTrackStatus())
-//    if(trackInfo->GetTrackStatus()&hitSphere)      
-      //only draw this hit if the photon has hit the sphere first
       hit->SetDrawit(true);
-  //}
+  
 
   return true;
 }

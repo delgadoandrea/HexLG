@@ -159,6 +159,8 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
 
     G4AnalysisManager::Instance()->FillH1(1, fHitCount);
     G4AnalysisManager::Instance()->FillH1(2, fPMTsAboveThreshold);
+    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,0.,0.);
+
 
     /*if(fHitCount > 0) {//dont bother unless there were hits
       reconPos/=fHitCount;
