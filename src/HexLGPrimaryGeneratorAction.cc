@@ -25,11 +25,11 @@ HexLGPrimaryGeneratorAction::HexLGPrimaryGeneratorAction(){
                                      FindParticle(particleName="opticalphoton"));
   //Default energy,position,momentum
   fParticleGun->SetParticleEnergy(3.2*eV);
-  //fParticleGun->SetParticlePosition(G4ThreeVector(0.0 , 0.0, .0*cm));
+  fParticleGun->SetParticlePosition(G4ThreeVector(0.0 , 0.0, .0*cm));
 
   //G4double angle = G4UniformRand();//*360.0*deg;
-  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(angle,0.,1.-angle));
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(std::cos(45.*deg),std::sin(45.*deg),0.));  
+  G4double angle = G4UniformRand() * 360.0*deg;
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(std::cos(angle),std::sin(angle),0.));   
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

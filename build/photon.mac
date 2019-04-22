@@ -10,5 +10,5 @@
 #/gun/polarization 0 1 0
 /HexLG/gun/optPhotonPolar
 
-/tracking/verbose 1
+#/tracking/verbose 1
 /run/beamOn 1000
