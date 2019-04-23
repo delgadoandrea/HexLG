@@ -1,5 +1,4 @@
 #include "HexLGEventAction.hh"
-#include "HexLGScintHit.hh"
 #include "HexLGPMTHit.hh"
 #include "HexLGTrajectory.hh"
 #include "HexLGRun.hh"
@@ -21,15 +20,13 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGEventAction::HexLGEventAction(const HexLGDetectorConstruction* det)
-  : fDetector(det),fScintCollID(-1),fPMTCollID(-1),fVerbose(0),
+  : fDetector(det),fPMTCollID(-1),fVerbose(0),
    fPMTThreshold(1),fForcedrawphotons(false),fForcenophotons(false)
 {
   fEventMessenger = new HexLGEventMessenger(this);
   //fPrimaryGenerator = new HexLGPrimaryGeneratorMessenger(this);
 
   fHitCount = 0;
-  fPhotonCount_Scint = 0;
-  fPhotonCount_Ceren = 0;
   fAbsorptionCount = 0;
   fBoundaryAbsorptionCount = 0;
   fTotE = 0.0;
@@ -49,8 +46,6 @@ HexLGEventAction::~HexLGEventAction(){}
 void HexLGEventAction::BeginOfEventAction(const G4Event*) {
  
   fHitCount = 0;
-  fPhotonCount_Scint = 0;
-  fPhotonCount_Ceren = 0;
   fAbsorptionCount = 0;
   fBoundaryAbsorptionCount = 0;
   fTotE = 0.0;
@@ -61,8 +56,6 @@ void HexLGEventAction::BeginOfEventAction(const G4Event*) {
   fPMTsAboveThreshold = 0;
 
   G4SDManager* SDman = G4SDManager::GetSDMpointer();
-  if(fScintCollID<0)
-    fScintCollID=SDman->GetCollectionID("scintCollection");
   if(fPMTCollID<0)
     fPMTCollID=SDman->GetCollectionID("pmtHitCollection");
 }
@@ -89,56 +82,13 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
     }
   }
  
-  HexLGScintHitsCollection* scintHC = nullptr;
   HexLGPMTHitsCollection* pmtHC = nullptr;
   G4HCofThisEvent* hitsCE = anEvent->GetHCofThisEvent();
  
   //Get the hit collections
   if(hitsCE){
-    if(fScintCollID>=0) {
-      scintHC = (HexLGScintHitsCollection*)(hitsCE->GetHC(fScintCollID));
-    }
     if(fPMTCollID>=0) {
       pmtHC = (HexLGPMTHitsCollection*)(hitsCE->GetHC(fPMTCollID));
-    }
-  }
-
-  //Hits in scintillator
-  if(scintHC){
-    int n_hit = scintHC->entries();
-    G4ThreeVector  eWeightPos(0.);
-    G4double edep;
-    G4double edepMax=0;
-
-    for(int i=0;i<n_hit;i++){ //gather info on hits in scintillator
-      edep=(*scintHC)[i]->GetEdep();
-      fTotE += edep;
-      eWeightPos += (*scintHC)[i]->GetPos()*edep;//calculate energy weighted pos
-      if(edep>edepMax){
-        edepMax=edep;//store max energy deposit
-        G4ThreeVector posMax=(*scintHC)[i]->GetPos();
-        fPosMax = posMax;
-        fEdepMax = edep;
-      }
-    }
-    
-    G4AnalysisManager::Instance()->FillH1(7, fTotE);
-    
-    if(fTotE == 0.){
-      if(fVerbose>0)G4cout<<"No hits in the scintillator this event."<<G4endl;
-    }
-    else{
-      //Finish calculation of energy weighted position
-      eWeightPos /= fTotE;
-      fEWeightPos = eWeightPos; 
-      if(fVerbose>0){
-        G4cout << "\tEnergy weighted position of hits in HexLG : "
-               << eWeightPos/mm << G4endl;
-      }
-    }
-    if(fVerbose>0){
-    G4cout << "\tTotal energy deposition in scintillator : "
-           << fTotE / keV << " (keV)" << G4endl;
     }
   }
  
@@ -159,7 +109,7 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
 
     G4AnalysisManager::Instance()->FillH1(1, fHitCount);
     G4AnalysisManager::Instance()->FillH1(2, fPMTsAboveThreshold);
-    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,0.,0.);
+    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,1.,1.);
 
 
     /*if(fHitCount > 0) {//dont bother unless there were hits
@@ -172,9 +122,6 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
     }*/
     pmtHC->DrawAllHits();
   }
-
-  G4AnalysisManager::Instance()->FillH1(3, fPhotonCount_Scint);
-  G4AnalysisManager::Instance()->FillH1(4, fPhotonCount_Ceren);
   G4AnalysisManager::Instance()->FillH1(5, fAbsorptionCount);
   G4AnalysisManager::Instance()->FillH1(6, fBoundaryAbsorptionCount);
 
@@ -184,10 +131,6 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
            << fHitCount << G4endl;
     G4cout << "\tNumber of PMTs above threshold("<<fPMTThreshold<<") : "
            << fPMTsAboveThreshold << G4endl;
-    G4cout << "\tNumber of photons produced by scintillation in this event : "
-           << fPhotonCount_Scint << G4endl;
-    G4cout << "\tNumber of photons produced by cerenkov in this event : "
-           << fPhotonCount_Ceren << G4endl;
     G4cout << "\tNumber of photons absorbed (OpAbsorption) in this event : "
            << fAbsorptionCount << G4endl;
     G4cout << "\tNumber of photons absorbed at boundaries (OpBoundary) in "
@@ -203,18 +146,11 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
     G4RunManager::GetRunManager()->GetNonConstCurrentRun());
 
   run->IncHitCount(fHitCount);
-  run->IncPhotonCount_Scint(fPhotonCount_Scint);
-  run->IncPhotonCount_Ceren(fPhotonCount_Ceren);
   run->IncEDep(fTotE);
   run->IncAbsorption(fAbsorptionCount);
   run->IncBoundaryAbsorption(fBoundaryAbsorptionCount);
   run->IncHitsAboveThreshold(fPMTsAboveThreshold);
 
-  //If we have set the flag to save 'special' events, save here
-  //if(fPhotonCount_Scint + fPhotonCount_Ceren <= fDetector->GetSaveThreshold())
-  //{
-  //  G4RunManager::GetRunManager()->rndmSaveThisEvent();
-  //}
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

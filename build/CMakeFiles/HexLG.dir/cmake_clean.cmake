@@ -12,7 +12,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorMessenger.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGRun.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o"
-  "CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o"
   "CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o"

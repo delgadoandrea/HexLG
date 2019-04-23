@@ -226,22 +226,9 @@ CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/1zd/HexLG/src/HexLGRunAction.cc -o CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.s
 
-CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o: CMakeFiles/HexLG.dir/flags.make
-CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o: ../src/HexLGScintHit.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o -c /Users/1zd/HexLG/src/HexLGScintHit.cc
-
-CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/1zd/HexLG/src/HexLGScintHit.cc > CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.i
-
-CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/1zd/HexLG/src/HexLGScintHit.cc -o CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.s
-
 CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o: ../src/HexLGStackingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o -c /Users/1zd/HexLG/src/HexLGStackingAction.cc
 
 CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.i: cmake_force
@@ -254,7 +241,7 @@ CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o: ../src/HexLGSteppingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o -c /Users/1zd/HexLG/src/HexLGSteppingAction.cc
 
 CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.i: cmake_force
@@ -267,7 +254,7 @@ CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o: ../src/HexLGSteppingMessenger.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o -c /Users/1zd/HexLG/src/HexLGSteppingMessenger.cc
 
 CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.i: cmake_force
@@ -280,7 +267,7 @@ CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.o: ../src/HexLGTrackingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.o -c /Users/1zd/HexLG/src/HexLGTrackingAction.cc
 
 CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.i: cmake_force
@@ -293,7 +280,7 @@ CMakeFiles/HexLG.dir/src/HexLGTrackingAction.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.o: ../src/HexLGTrajectory.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.o -c /Users/1zd/HexLG/src/HexLGTrajectory.cc
 
 CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.i: cmake_force
@@ -306,7 +293,7 @@ CMakeFiles/HexLG.dir/src/HexLGTrajectory.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.o: ../src/HexLGUserTrackInformation.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.o -c /Users/1zd/HexLG/src/HexLGUserTrackInformation.cc
 
 CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.i: cmake_force
@@ -319,7 +306,7 @@ CMakeFiles/HexLG.dir/src/HexLGUserTrackInformation.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.o: ../src/MaterialsHelper.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.o -c /Users/1zd/HexLG/src/MaterialsHelper.cc
 
 CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.i: cmake_force
@@ -332,7 +319,7 @@ CMakeFiles/HexLG.dir/src/MaterialsHelper.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/StringManip.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/StringManip.cc.o: ../src/StringManip.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/HexLG.dir/src/StringManip.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/HexLG.dir/src/StringManip.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/StringManip.cc.o -c /Users/1zd/HexLG/src/StringManip.cc
 
 CMakeFiles/HexLG.dir/src/StringManip.cc.i: cmake_force
@@ -345,7 +332,7 @@ CMakeFiles/HexLG.dir/src/StringManip.cc.s: cmake_force
 
 CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.o: CMakeFiles/HexLG.dir/flags.make
 CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.o: ../src/SurfacesHelper.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.o -c /Users/1zd/HexLG/src/SurfacesHelper.cc
 
 CMakeFiles/HexLG.dir/src/SurfacesHelper.cc.i: cmake_force
@@ -371,7 +358,6 @@ HexLG_OBJECTS = \
 "CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorMessenger.cc.o" \
 "CMakeFiles/HexLG.dir/src/HexLGRun.cc.o" \
 "CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o" \
-"CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o" \
 "CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o" \
 "CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o" \
 "CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o" \
@@ -398,7 +384,6 @@ HexLG: CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorAction.cc.o
 HexLG: CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorMessenger.cc.o
 HexLG: CMakeFiles/HexLG.dir/src/HexLGRun.cc.o
 HexLG: CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o
-HexLG: CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o
 HexLG: CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o
 HexLG: CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o
 HexLG: CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o
@@ -455,7 +440,7 @@ HexLG: /Users/1zd/geant4.10.05-install/lib/libG4intercoms.dylib
 HexLG: /Users/1zd/geant4.10.05-install/lib/libG4global.dylib
 HexLG: /Users/1zd/geant4.10.05-install/lib/libG4clhep.dylib
 HexLG: CMakeFiles/HexLG.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable HexLG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/1zd/HexLG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable HexLG"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/HexLG.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

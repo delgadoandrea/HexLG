@@ -1395,7 +1395,6 @@ CMakeFiles/HexLG.dir/src/HexLGEventAction.cc.o
  ../include/HexLGPMTHit.hh
  ../include/HexLGPMTSD.hh
  ../include/HexLGRun.hh
- ../include/HexLGScintHit.hh
  ../include/HexLGTrajectory.hh
  /Users/1zd/HexLG/src/HexLGEventAction.cc
  /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h
@@ -3070,70 +3069,6 @@ CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o
  /Users/1zd/geant4.10.05-install/include/Geant4/tools/wroot/to
  /Users/1zd/geant4.10.05-install/include/Geant4/tools/wroot/tree
  /Users/1zd/geant4.10.05-install/include/Geant4/tools/wroot/wbuf
-CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o
- ../include/HexLGScintHit.hh
- /Users/1zd/HexLG/src/HexLGScintHit.cc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/BasicVector3D.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/Normal3D.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/Point3D.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/Transform3D.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/Transform3D.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Geometry/Vector3D.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Units/PhysicalConstants.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Units/SystemOfUnits.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Utility/defs.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/AxisAngle.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/AxisAngle.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/LorentzVector.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/LorentzVector.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/Rotation.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/Rotation.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationInterfaces.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationInterfaces.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationX.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationX.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationY.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationY.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationZ.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/RotationZ.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/ThreeVector.h
- /Users/1zd/geant4.10.05-install/include/Geant4/CLHEP/Vector/ThreeVector.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Allocator.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4AllocatorPool.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4AutoLock.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Color.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Colour.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4EnvironmentUtils.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Exception.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4ExceptionSeverity.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4GeomSplitter.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4LogicalVolume.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4LogicalVolume.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Region.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Region.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/G4RotationMatrix.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4String.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4String.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/G4THitsCollection.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Threading.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4ThreeVector.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Transform3D.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4Types.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VExceptionHandler.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VHit.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VHitsCollection.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VPhysicalVolume.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VPhysicalVolume.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VVisManager.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VisAttributes.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/G4VisAttributes.icc
- /Users/1zd/geant4.10.05-install/include/Geant4/G4ios.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/geomdefs.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/geomwdefs.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/globals.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/graphics_reps_defs.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/templates.hh
- /Users/1zd/geant4.10.05-install/include/Geant4/tls.hh
 CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o
  ../include/HexLGEventAction.hh
  ../include/HexLGEventMessenger.hh

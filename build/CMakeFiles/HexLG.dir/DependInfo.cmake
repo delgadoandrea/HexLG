@@ -17,7 +17,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/1zd/HexLG/src/HexLGPrimaryGeneratorMessenger.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGPrimaryGeneratorMessenger.cc.o"
   "/Users/1zd/HexLG/src/HexLGRun.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGRun.cc.o"
   "/Users/1zd/HexLG/src/HexLGRunAction.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.o"
-  "/Users/1zd/HexLG/src/HexLGScintHit.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o"
   "/Users/1zd/HexLG/src/HexLGStackingAction.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGStackingAction.cc.o"
   "/Users/1zd/HexLG/src/HexLGSteppingAction.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGSteppingAction.cc.o"
   "/Users/1zd/HexLG/src/HexLGSteppingMessenger.cc" "/Users/1zd/HexLG/build/CMakeFiles/HexLG.dir/src/HexLGSteppingMessenger.cc.o"

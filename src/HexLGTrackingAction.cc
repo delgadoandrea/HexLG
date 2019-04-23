@@ -25,10 +25,7 @@ void HexLGTrackingAction::PreUserTrackingAction(const G4Track* aTrack)
   //This user track information is only relevant to the photons
   fpTrackingManager->SetUserTrackInformation(new HexLGUserTrackInformation);
 
-  /*  const G4VProcess* creator = aTrack->GetCreatorProcess();
-  if(creator)
-    G4cout<<creator->GetProcessName()<<G4endl;
-  */
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

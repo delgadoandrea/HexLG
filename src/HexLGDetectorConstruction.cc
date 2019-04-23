@@ -42,22 +42,10 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGDetectorConstruction::HexLGDetectorConstruction()
-: G4VUserDetectorConstruction()//fLXe_mt(nullptr), fMPTPStyrene(nullptr)
+: G4VUserDetectorConstruction()
 {
-  /*fExperimentalHall_box = nullptr;
-  fExperimentalHall_log = nullptr;
-  fExperimentalHall_phys = nullptr;
 
-  fLXe = fAl = fAir = fVacuum = fGlass = nullptr;
-  fPstyrene = fPMMA = fPethylene1 = fPethylene2 = nullptr;
-
-  fN = fO = fC = fH = nullptr;
-
-  fSaveThreshold = 0;
-  SetDefaults();
-
-  DefineMaterials();
-  fDetectorMessenger = new HexLGDetectorMessenger(this);*/
+  //fDetectorMessenger = new HexLGDetectorMessenger(this);
 
 }
 
@@ -107,8 +95,6 @@ G4VSolid* createOctagon(double height, double basesside_dia, double pmtside_dia,
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
-
-  //if (fExperimentalHall_phys) { return fExperimentalHall_phys; }
 
   // Get nist material manager
   G4NistManager* nist = G4NistManager::Instance();
@@ -252,12 +238,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
 
    G4PVPlacement* extra_reflector_phys_2 =
    new G4PVPlacement(nullptr,G4ThreeVector(0,0,-scint_height/2.- box_front_cap_thick),extra_reflector_log,"extra_reflector_phys",scint_log,false,0,true);   
-   //G4PVPlacement* extra_reflector_inside_phys_1 = new G4PVPlacement(nullptr,{0,0,0},extra_reflector_inside_log,"extra_reflector_inside_phys_1",extra_reflector_log,false,0,true);
-   //new G4LogicalBorderSurface("extra_reflector_border_1",extra_reflector_inside_phys_1,extra_reflector_phys_1,SurfacesHelper::S().ESR);
 
-   //G4PVPlacement* extra_reflector_phys_2 = 
-   //new G4PVPlacement(nullptr,G4ThreeVector(0,0,-scint_height/2.- box_front_cap_thick),extra_reflector_log,"extra_reflector_phys",scint_log,false,2,true);
-   
    G4PVPlacement* extra_reflector_inside_phys = new G4PVPlacement(nullptr,{0,0,0},extra_reflector_inside_log,"extra_reflector_inside_phys",extra_reflector_log,false,0,true);
    new G4LogicalBorderSurface("extra_reflector_border_1",extra_reflector_inside_phys,extra_reflector_phys_1,SurfacesHelper::S().ESR);
    new G4LogicalBorderSurface("extra_reflector_border_2",extra_reflector_inside_phys,extra_reflector_phys_2,SurfacesHelper::S().ESR);   
@@ -286,15 +267,7 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
                      false,                   //no boolean operation
                      0,                       //copy number
                      checkOverlaps); 
-   //if(npm==1)new G4PVPlacement(pmt_flip,                       //no rotation
-   //                  {0,0,-scint_height/2.-box_front_cap_thick },                    //at position
-   //                  m_Hexagone_log,             //its logical volume
-   //                  "PMT_main_log_"+to_str(npm+1),                //its name
-   //                  logicWorld,                //its mother  volume
-   //                  false,                   //no boolean operation
-   //                  0,                       //copy number
-   //                  checkOverlaps);
-    //}
+
    //----------------------------------------------------------------------------------------------------------------------
    // Oil volume
    //---------------------------------------------------------------------------------------------------------------------- 
@@ -373,40 +346,35 @@ G4VPhysicalVolume* HexLGDetectorConstruction::Construct(){
    
    //----------------------------------------------------------------------------------------------------------------------
 
-     //G4MultiFunctionalDetector* photocathode_MFD = new G4MultiFunctionalDetector("photocathodeMFD");
-     //PhotoMultiplierScorer* photocathode_PMScorer = new PhotoMultiplierScorer("photocathodeScorer",4);
-     //photocathode_MFD->RegisterPrimitive(photocathode_PMScorer);
-     //G4SDManager::GetSDMpointer()->AddNewDetector(photocathode_MFD);
-     //photocathode_log->SetSensitiveDetector(photocathode_MFD);  
 
     // PMT SD Optical Surface Properties
 
-     /*G4OpticalSurface* photonDetSurface = new G4OpticalSurface("PhotonDetSurface", unified, ground, dielectric_metal );
+     G4OpticalSurface* photonDetSurface = new G4OpticalSurface("PhotonDetSurface", unified, ground, dielectric_metal );
 
      G4MaterialPropertiesTable* photonDetSurfaceProperty = new G4MaterialPropertiesTable();
 
      G4double p_mppc[] = {2.0*eV, 3.47*eV};
      const G4int nbins = sizeof(p_mppc)/sizeof(G4double);
-     G4double refl_mppc[] = {1.0,1.0};
-     assert(sizeof(refl_mppc) == sizeof(p_mppc));
+     //G4double refl_mppc[] = {1.0,1.0};
+     //assert(sizeof(refl_mppc) == sizeof(p_mppc));
      G4double effi_mppc[] = {1, 1};
      assert(sizeof(effi_mppc) == sizeof(p_mppc));
-     G4double SpecularLobe2[] = {1.0,1.0};
-     assert(sizeof(SpecularLobe2) == sizeof(p_mppc));
-     G4double SpecularSpike2[] = {0.0, 0.0};
-     assert(sizeof(SpecularSpike2) == sizeof(p_mppc));
-     G4double Backscatter2[] = {0.0, 0.0};
-     assert(sizeof(Backscatter2) == sizeof(p_mppc));
+     //G4double SpecularLobe2[] = {1.0,1.0};
+     //assert(sizeof(SpecularLobe2) == sizeof(p_mppc));
+     //G4double SpecularSpike2[] = {0.0, 0.0};
+     //assert(sizeof(SpecularSpike2) == sizeof(p_mppc));
+     //G4double Backscatter2[] = {0.0, 0.0};
+     //assert(sizeof(Backscatter2) == sizeof(p_mppc));
  
-     photonDetSurfaceProperty->AddProperty("REFLECTIVITY",p_mppc,refl_mppc,nbins);
+     //photonDetSurfaceProperty->AddProperty("REFLECTIVITY",p_mppc,refl_mppc,nbins);
      photonDetSurfaceProperty->AddProperty("EFFICIENCY",p_mppc,effi_mppc,nbins);
-     photonDetSurfaceProperty->AddProperty("SPECULARLOBECONSTANT", p_mppc, SpecularLobe2, nbins);
-     photonDetSurfaceProperty->AddProperty("SPECULARSPIKECONSTANT", p_mppc, SpecularSpike2, nbins);
-     photonDetSurfaceProperty->AddProperty("BACKSCATTERCONSTANT", p_mppc, Backscatter2, nbins);
+     //photonDetSurfaceProperty->AddProperty("SPECULARLOBECONSTANT", p_mppc, SpecularLobe2, nbins);
+     //photonDetSurfaceProperty->AddProperty("SPECULARSPIKECONSTANT", p_mppc, SpecularSpike2, nbins);
+     //photonDetSurfaceProperty->AddProperty("BACKSCATTERCONSTANT", p_mppc, Backscatter2, nbins);
 
      photonDetSurface->SetMaterialPropertiesTable(photonDetSurfaceProperty);
 
-     new G4LogicalSkinSurface("PhotonDetSurface",photocathode_log,photonDetSurface);*/
+     new G4LogicalSkinSurface("PhotonDetSurface",photocathode_log,photonDetSurface);
             
   return physWorld;
 }

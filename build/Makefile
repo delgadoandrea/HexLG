@@ -520,33 +520,6 @@ src/HexLGRunAction.cc.s:
 	$(MAKE) -f CMakeFiles/HexLG.dir/build.make CMakeFiles/HexLG.dir/src/HexLGRunAction.cc.s
 .PHONY : src/HexLGRunAction.cc.s
 
-src/HexLGScintHit.o: src/HexLGScintHit.cc.o
-
-.PHONY : src/HexLGScintHit.o
-
-# target to build an object file
-src/HexLGScintHit.cc.o:
-	$(MAKE) -f CMakeFiles/HexLG.dir/build.make CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.o
-.PHONY : src/HexLGScintHit.cc.o
-
-src/HexLGScintHit.i: src/HexLGScintHit.cc.i
-
-.PHONY : src/HexLGScintHit.i
-
-# target to preprocess a source file
-src/HexLGScintHit.cc.i:
-	$(MAKE) -f CMakeFiles/HexLG.dir/build.make CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.i
-.PHONY : src/HexLGScintHit.cc.i
-
-src/HexLGScintHit.s: src/HexLGScintHit.cc.s
-
-.PHONY : src/HexLGScintHit.s
-
-# target to generate assembly for a file
-src/HexLGScintHit.cc.s:
-	$(MAKE) -f CMakeFiles/HexLG.dir/build.make CMakeFiles/HexLG.dir/src/HexLGScintHit.cc.s
-.PHONY : src/HexLGScintHit.cc.s
-
 src/HexLGStackingAction.o: src/HexLGStackingAction.cc.o
 
 .PHONY : src/HexLGStackingAction.o
@@ -842,9 +815,6 @@ help:
 	@echo "... src/HexLGRunAction.o"
 	@echo "... src/HexLGRunAction.i"
 	@echo "... src/HexLGRunAction.s"
-	@echo "... src/HexLGScintHit.o"
-	@echo "... src/HexLGScintHit.i"
-	@echo "... src/HexLGScintHit.s"
 	@echo "... src/HexLGStackingAction.o"
 	@echo "... src/HexLGStackingAction.i"
 	@echo "... src/HexLGStackingAction.s"

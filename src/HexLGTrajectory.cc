@@ -102,11 +102,7 @@ void HexLGTrajectory::DrawTrajectory() const
     G4Colour colour;
  
     if(fParticleDefinition==G4OpticalPhoton::OpticalPhotonDefinition()){
-      if(fWls) //WLS photons are red
-        colour = G4Colour(1.,0.,0.);
-      else{ //Scintillation and Cerenkov photons are green
         colour = G4Colour(0.,1.,0.);
-      }
     }
     else //All other particles are blue
       colour = G4Colour(0.,0.,1.);

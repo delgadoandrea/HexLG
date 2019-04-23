@@ -18,8 +18,6 @@
 HexLGRun::HexLGRun() : G4Run()
 {
   fHitCount                = fHitCount2                = 0;
-  fPhotonCount_Scint       = fPhotonCount_Scint2       = 0;
-  fPhotonCount_Ceren       = fPhotonCount_Ceren2       = 0;
   fAbsorptionCount         = fAbsorptionCount2         = 0;
   fBoundaryAbsorptionCount = fBoundaryAbsorptionCount2 = 0;
   fPMTsAboveThreshold      = fPMTsAboveThreshold2      = 0;
@@ -42,10 +40,6 @@ void HexLGRun::Merge(const G4Run* run)
   fHitCount2                += localRun->fHitCount2;
   fPMTsAboveThreshold       += localRun->fPMTsAboveThreshold;
   fPMTsAboveThreshold2      += localRun->fPMTsAboveThreshold2;
-  fPhotonCount_Scint        += localRun->fPhotonCount_Scint;
-  fPhotonCount_Scint2       += localRun->fPhotonCount_Scint2;
-  fPhotonCount_Ceren        += localRun->fPhotonCount_Ceren;
-  fPhotonCount_Ceren2       += localRun->fPhotonCount_Ceren2;
   fAbsorptionCount          += localRun->fAbsorptionCount;
   fAbsorptionCount2         += localRun->fAbsorptionCount2;
   fBoundaryAbsorptionCount  += localRun->fBoundaryAbsorptionCount;
@@ -87,24 +81,6 @@ void HexLGRun::EndOfRun()
 
   G4cout << "Number of hits per event above threshold:\t " << hitsAbove 
          << " +- " << rms_hitsAbove << G4endl;
-
-  G4double scint = G4double(fPhotonCount_Scint)/n_evt;
-  G4double scint2 = G4double(fPhotonCount_Scint2)/n_evt;
-  G4double rms_scint = scint2 - scint*scint;
-  if (rms_scint > 0.) rms_scint = std::sqrt(rms_scint/n_evt);
-  else rms_scint = 0.;
-
-  G4cout << "Number of scintillation photons per event :\t " << scint << " +- "
-         << rms_scint << G4endl;
-
-  G4double ceren = G4double(fPhotonCount_Ceren)/n_evt;
-  G4double ceren2 = G4double(fPhotonCount_Ceren2)/n_evt;
-  G4double rms_ceren = ceren2 - ceren*ceren;
-  if (rms_ceren > 0.) rms_ceren = std::sqrt(rms_ceren/n_evt);
-  else rms_ceren = 0.;
-
-  G4cout << "Number of Cerenkov photons per event:\t " << ceren << " +- " 
-         << rms_ceren << G4endl;
 
   G4double absorb = G4double(fAbsorptionCount)/n_evt;
   G4double absorb2 = G4double(fAbsorptionCount2)/n_evt;
