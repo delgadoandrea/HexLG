@@ -24,11 +24,12 @@ class HexLGDetectorMessenger: public G4UImessenger
  
   private:
 
-    HexLGDetectorConstruction*     fHexLGDetector;
+    HexLGDetectorConstruction*     fDetector;
     G4UIdirectory*               fDetectorDir;
     G4UIdirectory*               fVolumesDir;
     G4UIcmdWith3VectorAndUnit*   fDimensionsCmd;
     G4UIcmdWithAnInteger*        fSaveThresholdCmd;
+    G4UIcmdWithADouble*          fGunPosXCmd;
 };
 
 #endif

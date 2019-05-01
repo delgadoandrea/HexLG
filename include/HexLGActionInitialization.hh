@@ -11,7 +11,7 @@ class HexLGDetectorConstruction;
 class HexLGActionInitialization : public G4VUserActionInitialization
 {
   public:
-    HexLGActionInitialization(const HexLGDetectorConstruction* det);
+    HexLGActionInitialization(HexLGDetectorConstruction*);
     virtual ~HexLGActionInitialization();
 
     virtual void BuildForMaster() const;
@@ -19,7 +19,7 @@ class HexLGActionInitialization : public G4VUserActionInitialization
 
   private:
 
-    const HexLGDetectorConstruction* fDetector;
+    HexLGDetectorConstruction* fDetector;
 };
 
 #endif

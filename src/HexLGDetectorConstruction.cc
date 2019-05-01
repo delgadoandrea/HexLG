@@ -1,4 +1,5 @@
 #include "HexLGDetectorConstruction.hh"
+#include "HexLGDetectorMessenger.hh"
 #include "MaterialsHelper.hh"
 #include "SurfacesHelper.hh"
 #include "HexLGPMTSD.hh"
@@ -45,13 +46,16 @@ HexLGDetectorConstruction::HexLGDetectorConstruction()
 : G4VUserDetectorConstruction()
 {
 
-  //fDetectorMessenger = new HexLGDetectorMessenger(this);
+  fGunPosX = 0.0;
+  fDetectorMessenger = new HexLGDetectorMessenger(this);
 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-HexLGDetectorConstruction::~HexLGDetectorConstruction() {}
+HexLGDetectorConstruction::~HexLGDetectorConstruction() {
+  delete fDetectorMessenger;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 G4VSolid* createOctagon(double height, double basesside_dia, double pmtside_dia, double wall_thick){
@@ -431,6 +435,14 @@ void HexLGDetectorConstruction::ConstructSDandField() {
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+void HexLGDetectorConstruction::SetGunPosX(G4double ival)
+{
+  if(ival < 1){
+    G4cout << "\n ---> Warning for SetGunPosX: Not set!" << G4endl;
+    return;
+  }
+  fGunPosX = ival;
+}
 
 // void LXeDetectorConstruction::SetDimensions(G4ThreeVector dims) {
 //   fScint_x=dims[0];

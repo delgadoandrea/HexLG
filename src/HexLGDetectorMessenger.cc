@@ -15,7 +15,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGDetectorMessenger::HexLGDetectorMessenger(HexLGDetectorConstruction* detector)
- : fHexLGDetector(detector)
+ : fDetector(detector)
 {
   //Setup a command directory for detector controls with guidance
   fDetectorDir = new G4UIdirectory("/HexLG/detector/");
@@ -32,6 +32,10 @@ HexLGDetectorMessenger::HexLGDetectorMessenger(HexLGDetectorConstruction* detect
   fDimensionsCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   fDimensionsCmd->SetToBeBroadcasted(false);
 
+  fGunPosXCmd = new G4UIcmdWithADouble("/HexLG/detector/gunPosX", this);
+  fGunPosXCmd->SetGuidance("Set particle gun x-position");
+  fGunPosXCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -39,6 +43,7 @@ HexLGDetectorMessenger::HexLGDetectorMessenger(HexLGDetectorConstruction* detect
 HexLGDetectorMessenger::~HexLGDetectorMessenger()
 {
   delete fDimensionsCmd;
+  delete fGunPosXCmd;
 
 }
 
@@ -50,5 +55,8 @@ void HexLGDetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue
   //  fHexLGDetector->SetDimensions(fDimensionsCmd->GetNew3VectorValue(newValue));
   //}
   G4RunManager::GetRunManager()->ReinitializeGeometry(); //Add here this line
-  
+  if( command == fGunPosXCmd){
+    fDetector->SetGunPosX(fGunPosXCmd->GetNewDoubleValue(newValue));
+
+  } 
 }

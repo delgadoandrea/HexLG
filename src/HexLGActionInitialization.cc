@@ -12,7 +12,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGActionInitialization::HexLGActionInitialization(
-   const HexLGDetectorConstruction* det)
+   HexLGDetectorConstruction* det)
   : G4VUserActionInitialization(), fDetector(det)
 {}
 
@@ -32,7 +32,8 @@ void HexLGActionInitialization::BuildForMaster() const
 
 void HexLGActionInitialization::Build() const
 {
-  SetUserAction(new HexLGPrimaryGeneratorAction());
+  HexLGPrimaryGeneratorAction *prim = new HexLGPrimaryGeneratorAction(fDetector);
+  SetUserAction(prim);
 
   HexLGEventAction* eventAction = new HexLGEventAction(fDetector);
   SetUserAction(eventAction);

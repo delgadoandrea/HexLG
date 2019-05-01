@@ -7,12 +7,13 @@
 class G4ParticleGun;
 class G4Event;
 class HexLGPrimaryGeneratorMessenger;
+class HexLGDetectorConstruction;
 
 class HexLGPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
 
-    HexLGPrimaryGeneratorAction();
+    HexLGPrimaryGeneratorAction(HexLGDetectorConstruction*);
     virtual ~HexLGPrimaryGeneratorAction();
  
   public:
@@ -27,6 +28,7 @@ class HexLGPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
     G4ParticleGun* fParticleGun;
     HexLGPrimaryGeneratorMessenger* fGunMessenger;
+    HexLGDetectorConstruction* fDetector;
 
 };
 

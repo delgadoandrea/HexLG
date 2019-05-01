@@ -11,6 +11,7 @@
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
+class HexLGDetectorMessenger;
 
 /// Detector construction class to define materials and geometry.
 
@@ -24,6 +25,10 @@ class HexLGDetectorConstruction : public G4VUserDetectorConstruction
     virtual void ConstructSDandField();
 
     void SetDefaults();
+
+    void SetGunPosX(G4double);
+
+    G4double GetGunPosX() const   {return fGunPosX;};
     
     //G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
 
@@ -34,6 +39,12 @@ class HexLGDetectorConstruction : public G4VUserDetectorConstruction
    	   //Sensitive Detectors
     //G4Cache<HexLGScintSD*> fScint_SD;
     G4Cache<HexLGPMTSD*> fPmt_SD; //Right
+
+    G4double  fGunPosX;
+    
+    HexLGDetectorMessenger* fDetectorMessenger;
+
+
 
 };
 

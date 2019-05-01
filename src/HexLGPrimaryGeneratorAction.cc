@@ -1,5 +1,6 @@
 #include "HexLGPrimaryGeneratorAction.hh"
 #include "HexLGPrimaryGeneratorMessenger.hh"
+#include "HexLGDetectorConstruction.hh"
 
 #include "G4Event.hh"
 #include "G4ParticleGun.hh"
@@ -11,7 +12,9 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-HexLGPrimaryGeneratorAction::HexLGPrimaryGeneratorAction(){
+HexLGPrimaryGeneratorAction::HexLGPrimaryGeneratorAction(HexLGDetectorConstruction* detector)
+:G4VUserPrimaryGeneratorAction(), fDetector(detector)
+{
   G4int n_particle = 1;
   fParticleGun = new G4ParticleGun(n_particle);
 
@@ -36,11 +39,13 @@ HexLGPrimaryGeneratorAction::HexLGPrimaryGeneratorAction(){
 
 HexLGPrimaryGeneratorAction::~HexLGPrimaryGeneratorAction(){
     delete fParticleGun;
+    delete fGunMessenger;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void HexLGPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
+  G4cout << "Gun x-position: " << fDetector->GetGunPosX() << G4endl;
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 
