@@ -68,7 +68,7 @@ class HexLGEventAction : public G4UserEventAction
     HexLGEventMessenger* fEventMessenger;
     const HexLGDetectorConstruction* fDetector;
 
-    G4int fScintCollID;
+    //G4int fScintCollID;
     G4int fPMTCollID;
 
     G4int fVerbose;

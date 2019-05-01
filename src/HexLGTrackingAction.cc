@@ -39,7 +39,7 @@ void HexLGTrackingAction::PostUserTrackingAction(const G4Track* aTrack){
   //Lets choose to draw only the photons that hit the sphere and a pmt
   if(aTrack->GetDefinition()==G4OpticalPhoton::OpticalPhotonDefinition()){
 
-    const G4VProcess* creator=aTrack->GetCreatorProcess();
+    //const G4VProcess* creator=aTrack->GetCreatorProcess();
 
       if(trackInformation->GetTrackStatus()&hitPMT)
         trajectory->SetDrawTrajectory(true);

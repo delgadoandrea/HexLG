@@ -45,7 +45,8 @@ HexLGPrimaryGeneratorAction::~HexLGPrimaryGeneratorAction(){
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void HexLGPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
-  G4cout << "Gun x-position: " << fDetector->GetGunPosX() << G4endl;
+  //G4cout << "Gun x-position: " << fDetector->GetGunPosX() << G4endl;
+  fParticleGun->SetParticlePosition(G4ThreeVector(fDetector->GetGunPosX() , fDetector->GetGunPosY(), 0.0*cm));
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 

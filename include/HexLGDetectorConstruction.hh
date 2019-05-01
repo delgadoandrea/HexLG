@@ -27,20 +27,17 @@ class HexLGDetectorConstruction : public G4VUserDetectorConstruction
     void SetDefaults();
 
     void SetGunPosX(G4double);
+    void SetGunPosY(G4double);    
 
     G4double GetGunPosX() const   {return fGunPosX;};
-    
-    //G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
-
-  //protected:
-    //G4LogicalVolume*  fScoringVolume;
+    G4double GetGunPosY() const   {return fGunPosY;};    
 
    private:
-   	   //Sensitive Detectors
-    //G4Cache<HexLGScintSD*> fScint_SD;
+
     G4Cache<HexLGPMTSD*> fPmt_SD; //Right
 
     G4double  fGunPosX;
+    G4double  fGunPosYroot HexLGPMTSD;    
     
     HexLGDetectorMessenger* fDetectorMessenger;
 

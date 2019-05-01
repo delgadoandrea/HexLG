@@ -20,11 +20,9 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGEventAction::HexLGEventAction(const HexLGDetectorConstruction* det)
-  : fDetector(det),fPMTCollID(-1),fVerbose(0),
-   fPMTThreshold(1),fForcedrawphotons(false),fForcenophotons(false)
+  : fDetector(det),fVerbose(0), fPMTThreshold(1),fForcedrawphotons(false),fForcenophotons(false)
 {
   fEventMessenger = new HexLGEventMessenger(this);
-  //fPrimaryGenerator = new HexLGPrimaryGeneratorMessenger(this);
 
   fHitCount = 0;
   fAbsorptionCount = 0;
@@ -93,7 +91,7 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
   }
  
   if(pmtHC){
-    //G4ThreeVector reconPos(0.,0.,0.);
+    
     G4int pmts=pmtHC->entries();
     //Gather info from all PMTs
     for(G4int i=0;i<pmts;i++){
@@ -109,17 +107,10 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
 
     G4AnalysisManager::Instance()->FillH1(1, fHitCount);
     G4AnalysisManager::Instance()->FillH1(2, fPMTsAboveThreshold);
-    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,1.,1.);
 
+    //G4cout << "Gun x-position, from Event Action: " <<  << G4endl;
+    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,fDetector->GetGunPosX(),fDetector->GetGunPosY());
 
-    /*if(fHitCount > 0) {//dont bother unless there were hits
-      reconPos/=fHitCount;
-      if(fVerbose>0){
-        G4cout << "\tReconstructed position of hits in HexLG : "
-               << reconPos/mm << G4endl;
-      }
-      fReconPos = reconPos;
-    }*/
     pmtHC->DrawAllHits();
   }
   G4AnalysisManager::Instance()->FillH1(5, fAbsorptionCount);

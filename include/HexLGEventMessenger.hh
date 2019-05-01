@@ -21,7 +21,7 @@ class HexLGEventMessenger: public G4UImessenger
   private:
 
     HexLGEventAction*      fHexLGEvent;
-    HexLGPrimaryGeneratorMessenger* fPrimaryGenerator; 
+    //HexLGPrimaryGeneratorMessenger* fPrimaryGenerator; 
     G4UIcmdWithAnInteger*  fVerboseCmd;
     G4UIcmdWithAnInteger*  fPmtThresholdCmd;
     G4UIcmdWithABool*      fForceDrawPhotonsCmd;

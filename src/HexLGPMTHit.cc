@@ -11,7 +11,7 @@ G4ThreadLocal G4Allocator<HexLGPMTHit>* HexLGPMTHitAllocator=0;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HexLGPMTHit::HexLGPMTHit()
-  : fPmtNumber(-1),fPhotons(0),fPhysVol(nullptr),fDrawit(false),fPhotEnergy(0.0),fPos(0,0,0) {}
+  : fPmtNumber(-1),fPhotons(0),fPos(0,0,0),fPhysVol(nullptr),fPhotEnergy(0.0),fDrawit(false) {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
