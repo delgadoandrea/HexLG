@@ -32,7 +32,8 @@ HexLGPrimaryGeneratorAction::HexLGPrimaryGeneratorAction(HexLGDetectorConstructi
 
   //G4double angle = G4UniformRand();//*360.0*deg;
   G4double angle = G4UniformRand() * 360.0*deg;
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(std::cos(angle),std::sin(angle),0.));   
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(std::cos(angle),std::sin(angle),0.));   
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));     
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -45,7 +46,7 @@ HexLGPrimaryGeneratorAction::~HexLGPrimaryGeneratorAction(){
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void HexLGPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
-  //G4cout << "Gun x-position: " << fDetector->GetGunPosX() << G4endl;
+  G4cout << "Gun x-position: " << fDetector->GetGunPosX() << G4endl;
   fParticleGun->SetParticlePosition(G4ThreeVector(fDetector->GetGunPosX() , fDetector->GetGunPosY(), 0.0*cm));
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

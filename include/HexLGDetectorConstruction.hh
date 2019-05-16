@@ -37,7 +37,7 @@ class HexLGDetectorConstruction : public G4VUserDetectorConstruction
     G4Cache<HexLGPMTSD*> fPmt_SD; //Right
 
     G4double  fGunPosX;
-    G4double  fGunPosYroot HexLGPMTSD;    
+    G4double  fGunPosY;    
     
     HexLGDetectorMessenger* fDetectorMessenger;
 

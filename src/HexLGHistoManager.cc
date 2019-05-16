@@ -27,7 +27,6 @@ void HexLGHistoManager::Book()
   // in HexLGHistoManager.hh
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetFileName(fFileName);
-  //analysisManager->OpenFile(fFileName);
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetActivation(true);    // enable inactivation of histograms
 
@@ -58,5 +57,5 @@ void HexLGHistoManager::Book()
     analysisManager->SetH1Activation(ih, true);
   }
 
-  analysisManager->CreateH2("test", "test", 10,-5.,5., 10,-5.,5.);
+  analysisManager->CreateH2("test", "test", 20,-10.,10., 20,-10.,10.);
 }

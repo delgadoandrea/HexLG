@@ -2,7 +2,7 @@ import os, sys
 
 directory = 'Jobs/'
 
-r = range(1,3)
+r = range(-9,9)
 #r = range(-5,6)
 #jobCounter = 0
 
@@ -17,7 +17,7 @@ for x in r:
 		file.write(xpos+"\n")		
 		ypos = "/HexLG/detector/gunPosY "+str(y)
 		file.write(ypos+"\n")
-		file.write("/run/beamOn 1000\n")
+		file.write("/run/beamOn 10000\n")
 		file.close()
 		os.system("./HexLG "+filename)
 		outfile = directory+"HexLG_"+str(x)+"_"+str(y)+".root"

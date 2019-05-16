@@ -414,19 +414,19 @@ void HexLGDetectorConstruction::ConstructSDandField() {
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 void HexLGDetectorConstruction::SetGunPosX(G4double ival)
 {
-  if(ival < 1){
-    G4cout << "\n ---> Warning for SetGunPosX: Not set!" << G4endl;
-    return;
-  }
+  //if(ival < 1){
+  //  G4cout << "\n ---> Warning for SetGunPosX: Not set!" << G4endl;
+  //  return;
+  //}
   fGunPosX = ival;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 void HexLGDetectorConstruction::SetGunPosY(G4double ival)
 {
-  if(ival < 1){
-    G4cout << "\n ---> Warning for SetGunPosY: Not set!" << G4endl;
-    return;
-  }
+  //if(ival < 1){
+  //  G4cout << "\n ---> Warning for SetGunPosY: Not set!" << G4endl;
+  //  return;
+  //}
   fGunPosY = ival;
 }
