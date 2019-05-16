@@ -32,11 +32,13 @@ HexLGDetectorMessenger::HexLGDetectorMessenger(HexLGDetectorConstruction* detect
   fDimensionsCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   fDimensionsCmd->SetToBeBroadcasted(false);
 
-  fGunPosXCmd = new G4UIcmdWithADouble("/HexLG/detector/gunPosX", this);
+  fGunPosXCmd = new G4UIcmdWithADoubleAndUnit("/HexLG/detector/gunPosX", this);
+  fGunPosXCmd->SetDefaultUnit("cm");
   fGunPosXCmd->SetGuidance("Set particle gun x-position");
   fGunPosXCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
-  fGunPosYCmd = new G4UIcmdWithADouble("/HexLG/detector/gunPosY", this);
+  fGunPosYCmd = new G4UIcmdWithADoubleAndUnit("/HexLG/detector/gunPosY", this);
+  fGunPosYCmd->SetDefaultUnit("cm");  
   fGunPosYCmd->SetGuidance("Set particle gun y-position");
   fGunPosYCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 

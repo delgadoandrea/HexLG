@@ -108,8 +108,8 @@ void HexLGEventAction::EndOfEventAction(const G4Event* anEvent){
     G4AnalysisManager::Instance()->FillH1(1, fHitCount);
     G4AnalysisManager::Instance()->FillH1(2, fPMTsAboveThreshold);
 
-    //G4cout << "Gun x-position, from Event Action: " <<  << G4endl;
-    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,fDetector->GetGunPosX(),fDetector->GetGunPosY());
+    G4cout << "Gun x-position, from Event Action: " <<  fDetector->GetGunPosX() << G4endl;
+    if(fHitCount>0)G4AnalysisManager::Instance()->FillH2(0,fDetector->GetGunPosX()/10.,fDetector->GetGunPosY()/10.);
 
     pmtHC->DrawAllHits();
   }

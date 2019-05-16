@@ -2,7 +2,7 @@ import os, sys
 
 directory = 'Jobs/'
 
-r = range(-9,9)
+r = range(-10,11)
 #r = range(-5,6)
 #jobCounter = 0
 
@@ -13,6 +13,7 @@ for x in r:
 		file = open(filename, "w")
 		file.write("/run/initialize\n")
 		file.write("/gun/particle opticalphoton\n")
+		file.write("/HexLG/gun/optPhotonPolar\n")
 		xpos = "/HexLG/detector/gunPosX "+str(x)
 		file.write(xpos+"\n")		
 		ypos = "/HexLG/detector/gunPosY "+str(y)

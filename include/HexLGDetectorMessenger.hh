@@ -28,8 +28,8 @@ class HexLGDetectorMessenger: public G4UImessenger
     G4UIdirectory*               fDetectorDir;
     G4UIdirectory*               fVolumesDir;
     G4UIcmdWith3VectorAndUnit*   fDimensionsCmd;
-    G4UIcmdWithADouble*          fGunPosXCmd;
-    G4UIcmdWithADouble*          fGunPosYCmd;    
+    G4UIcmdWithADoubleAndUnit*          fGunPosXCmd;
+    G4UIcmdWithADoubleAndUnit*          fGunPosYCmd;    
 };
 
 #endif
