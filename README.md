@@ -9,6 +9,8 @@
 - Tracking classes to manually record hits.
 - Messenger classes for particle gun/event settings/tracking actions.
 
+- Python script for mac file creation.
+
 # To run the code (Assuming G4 already installed):
 1. Clone repository locally.
 2. Create "Build directory".
@@ -23,5 +25,5 @@ make -j<number of processors>
   ```
 5.Run.
 ```bash
-./Example1
+./HexLG photon.mac
   ```
